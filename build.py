@@ -36,7 +36,7 @@ IMAGES = {  # nombre local → archivo generado en Higgsfield
     "hero-kiosoft": "hf_20261110_202029_e3bfd288-f30e-48e3-ae97-bae524f387bf.png",
     "hero-inversion": "hf_20261110_001820_16e51f18-09dc-4fc7-997f-24c83da3ff89.png",
     "kiosoft-lector": "hf_20261110_202029_5e153f7b-5221-423b-abeb-1fa6b4a46a94.png",
-    "recarga-mostrador": "hf_20261110_202028_d2141742-fa54-4d8b-9880-bd3a93c073fd.png",
+    "recarga-mostrador": "hf_20261110_202629_fa8902e7-b59e-4e8a-afee-f7e8fe5d107d.png",
     "kiosoft-instalacion": "hf_20261110_001808_b42160f6-80f8-406a-9e00-7a52ec1f21a3.png",
     "burbujas": "hf_20261110_001820_946044ae-c331-4819-85ba-1678bd212d62.png",
     "planchado": "hf_20261110_001918_4d06b1d2-4c39-4d94-8c65-61c84c9abe0d.png",
