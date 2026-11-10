@@ -1,0 +1,108 @@
+<main id="main">
+    <section class="hx ph">
+      <div class="hx__bg" data-parallax="0.18"><img src="{{IMG:hero-inversion}}" alt="Fachada iluminada de una lavandería de autoservicio" width="1200" height="1600" fetchpriority="high" /></div>
+      <div class="bubbles" data-bubbles="scatter" aria-hidden="true"></div>
+      <div class="hx__content">
+        <p class="eyebrow" data-reveal>Inversionistas</p>
+        <h1 data-reveal>Tú inviertes. <span class="hl">Nosotros operamos.</span></h1>
+        <p class="lead" data-reveal>Lavanderías de autoservicio con cobro 100% digital y reporte mensual de cada peso.</p>
+        <div class="btn-row" data-reveal>
+          <a class="btn" href="#contacto">Solicita el dossier</a>
+          <a class="btn btn--ghost" href="#modelo">Cómo funciona</a>
+        </div>
+      </div>
+      <span class="scroll-cue" aria-hidden="true"></span>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Por qué lavanderías</p>
+          <h2 class="h-2">Un negocio aburrido, en el mejor sentido</h2>
+        </div>
+        <div class="perks" data-stagger>
+          <div class="perk"><div class="icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></div><b>El cliente regresa cada semana</b></div>
+          <div class="perk"><div class="icon"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg></div><b>Cero efectivo, cero faltantes</b></div>
+          <div class="perk"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2.5"/></svg></div><b>Vende 24 h con poco personal</b></div>
+          <div class="perk"><div class="icon"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><b>Datos por máquina y por hora</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band ph">
+      <div class="band__bg" data-parallax="0.28"><img src="{{IMG:dueno-reportes}}" alt="Socio revisando reportes de ventas en una tableta" width="1200" height="800" loading="lazy" /></div>
+      <div class="container">
+        <p class="eyebrow" data-reveal>Transparencia</p>
+        <h2 data-reveal>Cada peso, <span class="hl">trazable</span></h2>
+        <p data-reveal>Reportamos lo que cobró la máquina, no una estimación.</p>
+        <div class="counters">
+          <div class="counter"><b data-count="5">5</b><span>lavanderías en operación</span></div>
+          <div class="counter"><b data-count="100" data-suffix="%">100%</b><span>cobro digital</span></div>
+          <div class="counter"><b data-count="30">30</b><span>cortes al mes en contabilidad</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--dark" id="modelo">
+      <div class="bubbles" data-bubbles="left" aria-hidden="true"></div>
+      <div class="container" style="position:relative;z-index:2">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">El modelo</p>
+          <h2 class="h-2">Nosotros hacemos todo</h2>
+        </div>
+        <div class="grid grid--3 steps" data-stagger>
+          <div class="step"><h3 class="h-3">Ubicación con datos</h3><p>Zona, competencia y demanda.</p></div>
+          <div class="step"><h3 class="h-3">Instalación</h3><p>Equipo eficiente y KioSoft.</p></div>
+          <div class="step"><h3 class="h-3">Apertura</h3><p>Campaña local y alta en la app.</p></div>
+          <div class="step"><h3 class="h-3">Operación</h3><p>Personal, insumos y mantenimiento.</p></div>
+          <div class="step"><h3 class="h-3">Contabilidad</h3><p>Cortes diarios y facturación.</p></div>
+          <div class="step"><h3 class="h-3">Reporte mensual</h3><p>Ingresos, gastos y utilidad.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--muted">
+      <div class="container">
+        <div class="section-head center" data-reveal>
+          <p class="eyebrow">Preguntas frecuentes</p>
+          <h2 class="h-2">Antes de invertir</h2>
+        </div>
+        <div class="faq" data-reveal></div>
+        <p class="small muted center" style="margin-top:24px;max-width:70ch;margin-inline:auto">Información descriptiva; no constituye una oferta pública de valores. Resultados pasados no garantizan resultados futuros.</p>
+      </div>
+    </section>
+
+    <section class="section section--dark" id="contacto">
+      <div class="bubbles" data-bubbles="right" aria-hidden="true"></div>
+      <div class="container split" style="position:relative;z-index:2">
+        <div data-reveal>
+          <p class="eyebrow">Hablemos</p>
+          <h2 class="h-2">Pide el dossier</h2>
+          <p class="lead">Modelo, escenarios y visita a una sucursal.</p>
+        </div>
+        <form class="form" data-wa-form="Hola Lavaforte, me interesa el dossier para inversionistas." data-reveal>
+          <div class="row">
+            <label>Nombre<input name="nombre" required autocomplete="name" /></label>
+            <label>Ciudad<input name="ciudad" autocomplete="address-level2" /></label>
+          </div>
+          <label>Monto de interés
+            <select name="monto"><option value="">Prefiero platicarlo</option><option>Menos de $1 millón</option><option>$1 a $3 millones</option><option>Más de $3 millones</option></select>
+          </label>
+          <button class="btn" type="submit">Enviar por WhatsApp</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="promo ph" data-reveal="zoom">
+          <img src="{{IMG:kiosoft-tarjeta}}" alt="Lector de pago con tarjeta en una secadora" width="1200" height="1200" loading="lazy" />
+          <div class="promo__body">
+            <p class="eyebrow">¿Ya tienes una lavandería?</p>
+            <h2>Modernízala con <span class="hl">KioSoft</span></h2>
+            <div class="btn-row"><a class="btn" href="kiosoft.html">Ver el servicio</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>

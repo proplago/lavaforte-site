@@ -1,0 +1,56 @@
+/* ============================================================
+   LAVAFORTE — Tokens web
+   Fuente: Lavaforte Design System (colors/typography/spacing/effects).
+   Única fuente de verdad del sitio: las páginas consumen variables.
+   ============================================================ */
+@font-face{font-family:"Allotrope";src:url("../assets/fonts/allotrope-light.woff2") format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Allotrope";src:url("../assets/fonts/allotrope-regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Allotrope";src:url("../assets/fonts/allotrope-medium.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Allotrope";src:url("../assets/fonts/allotrope-bold.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Allotrope";src:url("../assets/fonts/allotrope-extrabold.woff2") format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Allotrope";src:url("../assets/fonts/allotrope-black.woff2") format("woff2");font-weight:900;font-display:swap}
+
+:root{
+  /* Paleta de marca */
+  --lf-navy:#001040; --lf-navy-800:#041a52; --lf-navy-900:#000a2c;
+  --lf-blue:#0060B0; --lf-sky:#0090D0; --lf-sky-light:#00B0F0;
+  --lf-yellow:#F0E010; --lf-gold:#F0C000; --lf-red:#C02000;
+  --lf-white:#FFFFFF; --lf-gray-50:#F5F8FC; --lf-gray-100:#EDF1F6; --lf-gray-200:#D8E0EC;
+  --lf-line:#B9C6D8; --lf-ink:#001040; --lf-ink-soft:#41506E;
+
+  /* Semánticos */
+  --bg:var(--lf-white); --bg-muted:var(--lf-gray-50); --bg-dark:var(--lf-navy);
+  --text:var(--lf-ink); --text-muted:var(--lf-ink-soft); --text-on-dark:#fff;
+  --text-on-dark-muted:rgba(255,255,255,.78);
+  --accent:var(--lf-sky); --accent-strong:var(--lf-blue); --divider:var(--lf-gray-200);
+
+  --grad-highlight:linear-gradient(90deg,var(--lf-yellow) 0%,var(--lf-gold) 100%);
+  --grad-header:linear-gradient(160deg,var(--lf-navy) 0%,var(--lf-navy-800) 55%,var(--lf-blue) 100%);
+  --grad-deep:linear-gradient(180deg,var(--lf-navy) 0%,var(--lf-navy-900) 100%);
+
+  /* Tipografía */
+  --font-display:"Allotrope","Baloo 2",system-ui,sans-serif;
+  --font-body:"Allotrope","Poppins",system-ui,sans-serif;
+  --fs-hero:clamp(2.6rem,6.2vw,5rem);
+  --fs-h2:clamp(1.9rem,3.6vw,3rem);
+  --fs-h3:clamp(1.15rem,1.6vw,1.35rem);
+  --fs-lead:clamp(1.08rem,1.4vw,1.28rem);
+  --fs-body:1.0625rem; --fs-small:.92rem; --fs-label:.78rem;
+  --tracking-label:.16em;
+
+  /* Espacio y forma */
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-6:24px;
+  --space-8:32px; --space-12:48px; --space-16:64px;
+  --section:clamp(4.5rem,9vw,7.5rem);
+  --radius-sm:8px; --radius-md:14px; --radius-lg:18px; --radius-xl:26px; --radius-pill:999px;
+  --container:1180px;
+
+  /* Efectos */
+  --shadow-sm:0 2px 6px rgba(0,16,64,.10);
+  --shadow-md:0 6px 18px rgba(0,16,64,.14);
+  --shadow-lg:0 18px 50px rgba(0,16,64,.22);
+  --bubble-fill:radial-gradient(circle at 32% 28%,rgba(255,255,255,.9) 0%,rgba(255,255,255,0) 32%),radial-gradient(circle at 70% 75%,rgba(0,176,240,.65) 0%,rgba(0,144,208,.15) 45%,rgba(0,176,240,.7) 100%);
+  --bubble-shine:inset -3px -5px 10px rgba(0,144,208,.5),inset 2px 3px 6px rgba(255,255,255,.3);
+  --ease:cubic-bezier(.34,1.2,.64,1);
+  --transition:160ms var(--ease);
+}
