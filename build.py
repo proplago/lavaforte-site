@@ -33,10 +33,10 @@ IMAGES = {  # nombre local → archivo generado en Higgsfield
     "dueno-reportes": "hf_20261109_234946_3f0dab68-c6a3-4b1e-b1ba-d0addeed66eb.png",
     "hero-clientes": "hf_20261110_001744_2d89b828-ec24-4dae-8a2d-dc252930b4c3.png",
     "hero-tecnico": "hf_20261110_001744_15467c5d-025a-413d-beab-e7a330365975.png",
-    "hero-kiosoft": "hf_20261110_001808_04622db4-12ed-456f-b8bc-1ac47d13b2c0.png",
+    "hero-kiosoft": "hf_20261110_202029_e3bfd288-f30e-48e3-ae97-bae524f387bf.png",
     "hero-inversion": "hf_20261110_001820_16e51f18-09dc-4fc7-997f-24c83da3ff89.png",
-    "kiosoft-lector": "hf_20261110_185845_e45899c4-e682-4e7f-82f1-7c890290c714.png",
-    "kiosoft-kiosco": "hf_20261110_185847_2b6dacf9-4b1a-4552-91d4-8a59f02c2614.png",
+    "kiosoft-lector": "hf_20261110_202029_5e153f7b-5221-423b-abeb-1fa6b4a46a94.png",
+    "recarga-mostrador": "hf_20261110_202028_d2141742-fa54-4d8b-9880-bd3a93c073fd.png",
     "kiosoft-instalacion": "hf_20261110_001808_b42160f6-80f8-406a-9e00-7a52ec1f21a3.png",
     "burbujas": "hf_20261110_001820_946044ae-c331-4819-85ba-1678bd212d62.png",
     "planchado": "hf_20261110_001918_4d06b1d2-4c39-4d94-8c65-61c84c9abe0d.png",
@@ -65,7 +65,7 @@ WAVE = '''<svg class="hero__wave" viewBox="0 0 816 120" preserveAspectRatio="non
 
 STRIPS = {
     "tecnico": '<div class="promo-strip"><a href="servicio-tecnico.html">¿Hotel, hospital o lavandería? <b>Reparamos tu equipo de lavandería</b> en León <span class="arrow" aria-hidden="true">→</span></a></div>',
-    "kiosoft": '<div class="promo-strip"><a href="kiosoft.html">¿Tienes una lavandería? <b>Instalamos KioSoft</b>: tus clientes pagan desde la app <span class="arrow" aria-hidden="true">→</span></a></div>',
+    "kiosoft": '<div class="promo-strip"><a href="kiosoft.html">¿Tienes una lavandería? <b>Instalamos KioSoft by PayRange</b>: tus clientes pagan desde la app <span class="arrow" aria-hidden="true">→</span></a></div>',
     None: "",
 }
 
@@ -390,13 +390,13 @@ FAQ_TECNICO = [
     ("¿Cómo se cobra el servicio?", "Pagas cada servicio: la visita de diagnóstico y, si apruebas la cotización, la reparación y las refacciones. Todo con factura."),
 ]
 FAQ_KIOSOFT = [
-    ("¿Qué es KioSoft?", "KioSoft es un sistema de cobro para lavanderías de autoservicio: un lector en cada lavadora y secadora, un punto de venta para recargar en mostrador y una app donde los clientes pagan y recargan saldo con bono."),
+    ("¿Qué es KioSoft by PayRange?", "KioSoft by PayRange es un sistema de cobro para lavanderías de autoservicio: un lector en cada lavadora y secadora y una app donde los clientes pagan y recargan saldo con bono."),
     ("¿Mis clientes tienen que descargar una app?", "Sí. La descarga toma un minuto. En el lanzamiento capacitamos a tu personal y te damos material para que tus clientes la usen desde el primer día."),
     ("¿Funciona con mis lavadoras actuales?", "KioSoft es compatible con la mayoría de equipos comerciales de autoservicio. En el diagnóstico confirmamos marca y modelo antes de cotizar."),
     ("¿Puedo seguir cobrando en mostrador?", "Sí. Tu personal puede recargar saldo a quien lo pida en mostrador, y el cliente usa ese saldo en las máquinas."),
     ("¿Cuánto tarda la instalación?", "Depende del número de equipos. La programamos para no frenar tu operación y te damos el calendario en la propuesta."),
     ("¿Trabajan en todo México?", "Sí. La configuración de precios y promociones la hacemos a distancia, y la instalación en sitio se agenda en tu ciudad."),
-    ("¿KioSoft y PayRange son lo mismo?", "Sí. KioSoft ahora forma parte de PayRange. Instalamos y configuramos sus lectores, puntos de venta y app de pago."),
+    ("¿KioSoft y PayRange son lo mismo?", "Sí. KioSoft ahora forma parte de PayRange. Por eso hoy se le conoce como KioSoft by PayRange. Instalamos y configuramos sus lectores y su app de pago."),
     ("¿Lavaforte es KioSoft?", "No. Lavaforte opera lavanderías de autoservicio en León y usa KioSoft en ellas. Instalamos y configuramos KioSoft (PayRange) para otros dueños; KioSoft y PayRange son marcas de su fabricante."),
 ]
 FAQ_INV = [
@@ -447,9 +447,9 @@ PAGES = [
                                 "audience": [{"@type": "BusinessAudience", "name": n} for n in ["Hoteles", "Hospitales", "Lavanderías de autoservicio"]]},
                           faq_schema(FAQ_TECNICO), crumbs(("Inicio", ""), ("Servicio técnico", "servicio-tecnico.html"))], priority="0.9"),
     dict(file="kiosoft.html", nav="kiosoft", strip=None, dock=("Cotizar", "#cotiza"), og_image="hero-kiosoft", body=page_kiosoft, wa="Hola Lavaforte, quiero cotizar la instalación de KioSoft.",
-         title="Instalación de KioSoft para lavanderías | Lavaforte",
-         desc="Instalamos KioSoft en lavanderías de autoservicio de todo México: tus clientes pagan desde la app, recargan con bono y tu lavandería vende las 24 h.",
-         schema=lambda: [ORG, {"@type": "Service", "name": "Instalación y configuración de KioSoft para lavanderías",
+         title="Instalación de KioSoft by PayRange en lavanderías | Lavaforte",
+         desc="Instalamos KioSoft by PayRange en lavanderías de autoservicio de todo México: tus clientes pagan desde la app, recargan con bono y tu lavandería vende las 24 h.",
+         schema=lambda: [ORG, {"@type": "Service", "name": "Instalación y configuración de KioSoft by PayRange para lavanderías",
                                 "serviceType": "Sistema de cobro por app para lavanderías de autoservicio", "description": "Instalación de lectores KioSoft en lavadoras y secadoras, configuración de la app de pago, recargas con bono, y precios. Lavaforte es instalador; KioSoft es marca de su fabricante.", "provider": {"@id": SITE + "#org"},
                                 "areaServed": {"@type": "Country", "name": "México"}},
                           faq_schema(FAQ_KIOSOFT), crumbs(("Inicio", ""), ("KioSoft", "kiosoft.html"))], priority="0.9"),

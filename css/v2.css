@@ -225,3 +225,8 @@ img.is-broken{opacity:0}
 .perk p{margin:0;line-height:1.4}
 @media (min-width:600px){.perks--2{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (min-width:900px){.perks--2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Foto real del lector */
+.reader-real{width:min(100%,380px);height:auto;margin-inline:auto;display:block;filter:drop-shadow(0 18px 30px rgba(0,16,64,.25));animation:float 5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media (prefers-reduced-motion:reduce){.reader-real{animation:none}}
