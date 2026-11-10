@@ -219,3 +219,9 @@ img.is-broken{opacity:0}
 .calc__out span{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--lf-sky-light);font-weight:700}
 .calc__out b{font-family:var(--font-display);font-weight:900;font-size:clamp(2.2rem,11vw,3rem);line-height:1;background:var(--grad-highlight);-webkit-background-clip:text;background-clip:text;color:transparent}
 .calc__out small{color:rgba(255,255,255,.75);font-size:.85rem}
+
+/* Fallas con descripción (landings de servicio técnico) */
+.perks--2{grid-template-columns:1fr}
+.perk p{margin:0;line-height:1.4}
+@media (min-width:600px){.perks--2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:900px){.perks--2{grid-template-columns:repeat(2,minmax(0,1fr))}}

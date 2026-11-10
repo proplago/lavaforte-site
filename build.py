@@ -65,7 +65,7 @@ WAVE = '''<svg class="hero__wave" viewBox="0 0 816 120" preserveAspectRatio="non
 
 STRIPS = {
     "tecnico": '<div class="promo-strip"><a href="servicio-tecnico.html">¿Hotel, hospital o lavandería? <b>Reparamos tu equipo de lavandería</b> en León <span class="arrow" aria-hidden="true">→</span></a></div>',
-    "kiosoft": '<div class="promo-strip"><a href="kiosoft.html">¿Tienes una lavandería? <b>Instalamos KioSoft</b>: cobro sin efectivo, app y reportes <span class="arrow" aria-hidden="true">→</span></a></div>',
+    "kiosoft": '<div class="promo-strip"><a href="kiosoft.html">¿Tienes una lavandería? <b>Instalamos KioSoft</b>: tus clientes pagan desde la app <span class="arrow" aria-hidden="true">→</span></a></div>',
     None: "",
 }
 
@@ -88,6 +88,9 @@ def crumbs(*pairs):
 ORG = {"@type": "Organization", "@id": SITE + "#org", "name": "Lavaforte Lavanderías", "url": SITE,
        "logo": SITE + "assets/img/lavaforte-logo-180.png", "slogan": "La evolución de lavar.",
        "telephone": "+52 477 907 5087",
+       "contactPoint": {"@type": "ContactPoint", "telephone": "+52 477 907 5087", "contactType": "customer service", "availableLanguage": "es",
+                        "contactOption": "WhatsApp", "hoursAvailable": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "18:00"}},
+       "knowsAbout": ["Lavandería de autoservicio", "Reparación de lavadoras industriales", "KioSoft", "Lavanderías de hotel y hospital"],
        "address": {"@type": "PostalAddress", "streetAddress": "Manantial 806-B, Valle del Campestre",
                    "postalCode": "37150", "addressLocality": "León", "addressRegion": "Guanajuato", "addressCountry": "MX"},
        "sameAs": ["https://www.instagram.com/lavaforte_lavanderias", "https://www.tiktok.com/@lavaforte_lavanderias",
@@ -104,25 +107,10 @@ PROCESS = '''<section class="section">
           <h2 class="h-2">De la falla a funcionando</h2>
         </div>
         <div class="grid grid--4 steps" data-stagger>
-          <div class="step"><h3 class="h-3">Nos escribes</h3><p>Foto o video de la falla por WhatsApp.</p></div>
-          <div class="step"><h3 class="h-3">Diagnóstico</h3><p>Visita y cotización antes de reparar.</p></div>
-          <div class="step"><h3 class="h-3">Reparación</h3><p>Probamos con un ciclo completo.</p></div>
-          <div class="step"><h3 class="h-3">Reporte</h3><p>Qué se hizo y cómo evitar que se repita.</p></div>
-        </div>
-      </div>
-    </section>'''
-
-POR_EVENTO = '''<section class="section section--muted" id="precio">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">Sin contratos</p>
-          <h2 class="h-2">Pagas por servicio, <span style="color:var(--lf-blue)">no por póliza</span></h2>
-        </div>
-        <div class="perks" data-stagger>
-          <div class="perk"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><b>Costo de visita desde el primer mensaje</b></div>
-          <div class="perk"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></div><b>Cotización antes de reparar</b></div>
-          <div class="perk"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4Z"/></svg></div><b>Garantía en mano de obra</b></div>
-          <div class="perk"><div class="icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div><b>Factura en todo</b></div>
+          <div class="step"><h3 class="h-3">Nos escribes</h3><p>Mándanos foto o video de la falla por WhatsApp y te decimos el costo de la visita.</p></div>
+          <div class="step"><h3 class="h-3">Diagnóstico</h3><p>Revisamos el equipo en sitio y te damos la cotización antes de reparar.</p></div>
+          <div class="step"><h3 class="h-3">Reparación</h3><p>Reparamos y probamos con un ciclo completo.</p></div>
+          <div class="step"><h3 class="h-3">Reporte y factura</h3><p>Qué se hizo, cómo evitar que se repita y tu factura.</p></div>
         </div>
       </div>
     </section>'''
@@ -159,53 +147,53 @@ SEGMENTOS = {
     "hoteles": dict(
         slug="reparacion-lavanderia-hoteles", nav="tecnico", img="lavanderia-hotel",
         title="Reparación de lavandería de hotel en León | Lavaforte",
-        desc="Servicio técnico por evento para lavadoras, secadoras y planchadoras de hotel en León. Diagnóstico en sitio, cotización antes de reparar y factura.",
+        desc="Reparación de lavadoras, secadoras y planchadoras de hotel en León. Diagnóstico en sitio, cotización antes de reparar y factura.",
         eyebrow="Lavanderías de hotel y motel · León",
         h1='Reparación de lavandería <span class="hl">para hoteles</span>',
         lead="Si la secadora se detiene, las habitaciones no se liberan. Reparamos en sitio y en tu horario.",
         wa="Hola Lavaforte, necesito servicio técnico para la lavandería de mi hotel.",
-        select="Hotel o motel",
+        select="Hotel o motel", band_h='Operamos lavanderías. <span class="hl">Sabemos qué no puede esperar.</span>',
         pains=[("Blancos atrasados", "Una secadora lenta o una lavadora que no centrifuga retrasa todo el turno de camaristas."),
                ("Consumo de gas alto", "Quemadores sucios, ductos tapados y sensores descalibrados cuestan dinero cada ciclo."),
                ("Planchadora con marcas", "Rodillo desgastado, temperatura dispareja o banda floja dejan sábanas mal planchadas."),
                ("Paros en temporada alta", "Revisamos el equipo antes del puente o la temporada para que no falle cuando más lo usas.")],
         faq=[("¿Pueden venir fuera del horario pico del hotel?", "Sí. Agendamos la visita en el horario en que la lavandería tenga menos carga para no frenar la operación."),
              ("¿Reparan planchadoras de rodillo?", "Sí. Revisamos rodillo, bandas, temperatura y alimentación, además de lavadoras extractoras y secadoras industriales."),
-             ("¿Necesito contratar una póliza?", "No. Trabajamos por evento: pides el servicio cuando lo necesitas y pagas solo esa visita y reparación."),
-             ("¿Entregan factura?", "Sí, todos los servicios se facturan a nombre del hotel.")]),
+             ("¿Cómo se cobra el servicio?", "Pagas cada servicio: la visita de diagnóstico y, si apruebas la cotización, la reparación y las refacciones. Todo con factura a nombre del hotel."),
+             ("¿Hacen revisiones antes de temporada alta?", "Sí. Agenda una revisión antes del puente o la temporada y te entregamos el estado de cada equipo con lo que conviene reparar.")]),
     "hospitales": dict(
         slug="reparacion-lavanderia-hospitales", nav="tecnico", img="lavanderia-hospital",
         title="Reparación de lavandería hospitalaria en León | Lavaforte",
-        desc="Reparación y mantenimiento por evento de lavadoras y secadoras industriales para hospitales y clínicas en León. Atención prioritaria y reporte por máquina.",
+        desc="Reparación de lavadoras y secadoras industriales de hospitales y clínicas en León, con reporte de cada servicio y factura.",
         eyebrow="Hospitales y clínicas · León",
         h1='Servicio técnico para <span class="hl">lavandería hospitalaria</span>',
         lead="La ropa del hospital no puede esperar. Atención prioritaria y reporte por máquina.",
         wa="Hola Lavaforte, necesito servicio técnico para la lavandería de mi hospital.",
-        select="Hospital o clínica",
+        select="Hospital o clínica", band_h='Cada visita, <span class="hl">documentada.</span>',
         pains=[("Equipo detenido", "Un paro en la lavandería obliga a mandar ropa fuera o a reducir la rotación de blancos."),
                ("Temperaturas de lavado", "Revisamos calentamiento, sensores y ciclos para que el equipo alcance la temperatura programada."),
                ("Secado incompleto", "Ductos, filtros y quemadores en mal estado alargan los ciclos y elevan el consumo."),
                ("Evidencia para auditoría", "Cada servicio queda documentado: falla, refacciones, pruebas y recomendaciones.")],
         faq=[("¿Atienden con prioridad a hospitales?", "Sí. Las fallas de lavandería hospitalaria se agendan con prioridad dentro de nuestra ruta del día."),
              ("¿Entregan reporte del servicio?", "Sí. Cada visita incluye un reporte con la falla encontrada, lo que se reparó y las pruebas realizadas."),
-             ("¿Necesito un contrato?", "No. Trabajamos por evento y facturamos cada servicio."),
+             ("¿Cómo se cobra el servicio?", "Pagas cada servicio: la visita de diagnóstico y, si apruebas la cotización, la reparación y las refacciones. Todo con factura."),
              ("¿Qué equipos atienden?", "Lavadoras extractoras, secadoras industriales de gas y eléctricas y planchadoras de rodillo.")]),
     "autoservicio": dict(
         slug="reparacion-lavanderia-autoservicio", nav="tecnico", img="tecnico-autoservicio",
         title="Reparación de lavadoras de autoservicio en León | Lavaforte",
-        desc="Reparamos lavadoras, secadoras, monederos y lectores de pago de lavanderías de autoservicio en León. Técnicos que operan su propia red de lavanderías.",
+        desc="Reparamos lavadoras, secadoras y lectores de pago de lavanderías de autoservicio en León. Técnicos que operan sus propias lavanderías.",
         eyebrow="Lavanderías de autoservicio · León",
         h1='Reparación de lavadoras y secadoras <span class="hl">de autoservicio</span>',
         lead="Máquina parada, dinero perdido. Operamos lavanderías: sabemos qué falla primero.",
         wa="Hola Lavaforte, necesito reparar equipo de mi lavandería de autoservicio.",
-        select="Lavandería de autoservicio",
-        pains=[("Lavadora que no arranca", "Fallas de tarjeta, cerradura de puerta, válvulas de agua o drenaje."),
+        select="Lavandería de autoservicio", band_h='Tenemos lavanderías como la tuya. <span class="hl">Sabemos qué falla.</span>',
+        pains=[("Lavadora que no arranca", "Falla en la placa electrónica, la chapa de la puerta o las válvulas de agua."),
                ("Secadora que no calienta", "Encendido, sensores, quemador, banda o flujo de aire."),
-               ("Monederos y lectores", "Monedas atoradas, lectores de pago sin conexión o precios mal configurados."),
-               ("Del efectivo a la app", "Si quieres dejar las monedas, instalamos KioSoft: cobro con app, tarjeta y reportes.")],
-        faq=[("¿Reparan lectores de pago y monederos?", "Sí. Revisamos monederos, lectores y su configuración. Si quieres pasar a cobro sin efectivo, instalamos KioSoft."),
+               ("Lavadora que no drena", "Bomba, manguera o filtro tapado que deja el ciclo a medias."),
+               ("Lector de pago sin conexión", "Lectores que no arrancan la máquina, sin internet o con precios mal configurados.")],
+        faq=[("¿Reparan lectores de pago?", "Sí. Revisamos lectores, conexión y configuración de precios. Si tu lavandería todavía cobra en mostrador, instalamos KioSoft para que cobre por app."),
              ("¿Cuánto tarda una reparación?", "Muchas fallas se resuelven en la primera visita. Si hace falta una refacción, te damos la fecha antes de pedirla."),
-             ("¿Trabajan con contrato?", "No. Trabajamos por evento: pides el servicio cuando lo necesitas."),
+             ("¿Cómo se cobra el servicio?", "Pagas cada servicio: la visita de diagnóstico y, si apruebas la cotización, la reparación y las refacciones. Todo con factura."),
              ("¿Por qué con Lavaforte?", "Porque operamos nuestras propias lavanderías de autoservicio en León y vivimos las mismas fallas que tú.")]),
 }
 
@@ -226,7 +214,7 @@ def hx(bg, alt, eyebrow, h1, lead, buttons, chips=None, crumb=None):
     </section>''' % (img(bg), html.escape(alt), cr, eyebrow, h1, lead, buttons, ch)
 
 def segment_body(s):
-    pains = "\n".join('<div class="perk"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3 2.5 20h19L12 3Z"/><path d="M12 10v4M12 17h.01"/></svg></div><b>%s</b></div>' % p[0] for p in s["pains"])
+    pains = "\n".join('<div class="perk"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3 2.5 20h19L12 3Z"/><path d="M12 10v4M12 17h.01"/></svg></div><b>%s</b><p class="small muted">%s</p></div>' % p for p in s["pains"])
     others = [v for v in SEGMENTOS.values() if v is not s]
     tiles = "".join('<a class="tile ph" href="%s.html"><img src="%s" alt="" width="1200" height="800" loading="lazy" /><div class="tile__body"><h3>%s</h3><span class="price">Ver servicio →</span></div></a>'
                     % (v["slug"], img(v["img"]), v["eyebrow"].split(" · ")[0]) for v in others)
@@ -241,7 +229,7 @@ def segment_body(s):
           <p class="eyebrow">Fallas que resolvemos</p>
           <h2 class="h-2">Lo que más nos llaman a reparar</h2>
         </div>
-        <div class="perks" style="grid-template-columns:repeat(2,minmax(0,1fr))" data-stagger>
+        <div class="perks perks--2" data-stagger>
           %(pains)s
         </div>
       </div>
@@ -253,12 +241,11 @@ def segment_body(s):
       <div class="band__bg" data-parallax="0.28"><img src="%(band)s" alt="" width="1200" height="800" loading="lazy" /></div>
       <div class="container">
         <p class="eyebrow" data-reveal>Por qué Lavaforte</p>
-        <h2 data-reveal>Operamos lavanderías. <span class="hl">Sabemos qué falla.</span></h2>
+        <h2 data-reveal>%(band_h)s</h2>
       </div>
     </section>
 
     %(process)s
-    %(evento)s
 
     <section class="section">
       <div class="container">
@@ -278,9 +265,9 @@ def segment_body(s):
         <div class="rail" style="--cols:2" data-stagger>%(tiles)s</div>
       </div>
     </section>
-  </main>''' % dict(hero=hx(s["img"], short, s["eyebrow"], s["h1"], s["lead"], btns, ["Por evento", "Cotización antes", "Factura"],
+  </main>''' % dict(hero=hx(s["img"], short, s["eyebrow"], s["h1"], s["lead"], btns, ["Diagnóstico en sitio", "Cotización antes de reparar", "Con factura"],
                           '<a href="servicio-tecnico.html">Servicio técnico</a> / <span>%s</span>' % short),
-                    pains=pains, services=services_block(), band=img("tecnico-industrial"), process=PROCESS, evento=POR_EVENTO,
+                    pains=pains, services=services_block(), band=img("tecnico-industrial"), process=PROCESS, band_h=s["band_h"],
                     faq=faq_html(s["faq"]), contact=contact_form(s["select"], s["wa"]), tiles=tiles)
 
 # ---------------------------------------------------------------- sucursales (SEO local)
@@ -373,12 +360,12 @@ def branch_faq(b):
     h = "; ".join("%s de %s" % x for x in b["hours"])
     return [("¿Qué horario tiene Lavaforte %s?" % b["name"], "El mostrador atiende %s. %s." % (h, b["badge"])),
             ("¿Dónde está Lavaforte %s?" % b["name"], "En %s, C.P. %s, León, Guanajuato." % (b["street"], b["cp"])),
-            ("¿Cómo pago el autoservicio?", "Con saldo en la app de Lavaforte o con tarjeta. Al recargar recibes saldo de regalo de hasta 30%."),
+            ("¿Cómo pago el autoservicio?", "Con la app de Lavaforte: recargas saldo, eliges tu máquina y arranca. Al recargar recibes hasta 30% de saldo extra."),
             ("¿Cuánto cuesta el lavado por encargo?", "Desde $30 por kilo con carga mínima de 3 kg. Escríbenos por WhatsApp al 477 907 5087 para precios de planchado y edredones.")]
 
 def branch_schema(key, b):
     return {"@type": "LaundryOrDryCleaner", "@id": SITE + "sucursal-%s.html#negocio" % key, "name": "Lavaforte %s" % b["name"],
-            "url": SITE + "sucursal-%s.html" % key, "image": SITE + "assets/img/lavaforte-logo-180.png", "telephone": "+52 477 907 5087",
+            "url": SITE + "sucursal-%s.html" % key, "image": SITE + "assets/img/gen/hero-clientes.webp", "telephone": "+52 477 907 5087",
             "priceRange": "$", "parentOrganization": {"@id": SITE + "#org"},
             "address": {"@type": "PostalAddress", "streetAddress": b["street"], "postalCode": b["cp"], "addressLocality": "León",
                         "addressRegion": "Guanajuato", "addressCountry": "MX"},
@@ -388,25 +375,28 @@ def branch_schema(key, b):
 
 # ---------------------------------------------------------------- FAQ de páginas "a mano"
 FAQ_INDEX = [
-    ("¿Puedo pagar con efectivo?", "El autoservicio funciona con saldo en la app o tarjeta. En mostrador te ayudamos a recargar y a usar la app la primera vez."),
+    ("¿Cómo funciona el autoservicio?", "Con la app de Lavaforte: descargas la app, recargas saldo y eliges tu máquina desde el celular. La app te avisa cuando termina tu ciclo."),
+    ("¿Puedo recargar saldo en mostrador?", "Sí. En horario de mostrador te ayudamos a recargar y a usar la app la primera vez."),
     ("¿Necesito llevar detergente?", "Nuestras lavadoras son de alta eficiencia y funcionan con detergente HE. Si no traes, pregunta en mostrador."),
     ("¿Cuánto cuesta lavar por encargo?", "Desde $30 por kilo con carga mínima de 3 kg. Te confirmamos la hora de entrega por WhatsApp."),
     ("¿Mi saldo sirve en cualquier sucursal?", "Sí. El saldo y el bono de recarga funcionan en todas las sucursales Lavaforte y no vencen."),
     ("¿Hay lavandería 24 horas en León?", "Sí. En Lavaforte San Juan Bosco y Cañaveral el autoservicio funciona las 24 horas con la app."),
 ]
 FAQ_TECNICO = [
+    ("¿Qué equipos reparan?", "Lavadoras extractoras, lavadoras y secadoras de autoservicio, secadoras industriales de gas y eléctricas, planchadoras de rodillo y lectores de pago."),
     ("¿Qué marcas atienden?", "Trabajamos con las principales marcas de equipo comercial e industrial. Mándanos marca y modelo y te confirmamos antes de la visita."),
     ("¿Qué zona cubren?", "León y su zona metropolitana. Para otras ciudades del Bajío, consúltanos."),
-    ("¿Cobran la visita de diagnóstico?", "Te decimos el costo desde el primer mensaje, junto con el tiempo estimado de llegada."),
-    ("¿Tengo que firmar un contrato o póliza?", "No. Cobramos por evento: pides el servicio cuando lo necesitas y pagas solo esa visita y reparación."),
-    ("¿Facturan?", "Sí. Todos nuestros servicios se facturan."),
+    ("¿Cuánto cuesta la visita?", "Te decimos el costo de la visita de diagnóstico antes de agendarla, junto con el día en que podemos ir."),
+    ("¿Cómo se cobra el servicio?", "Pagas cada servicio: la visita de diagnóstico y, si apruebas la cotización, la reparación y las refacciones. Todo con factura."),
 ]
 FAQ_KIOSOFT = [
-    ("¿Qué es KioSoft?", "KioSoft es un sistema de cobro sin efectivo para lavanderías de autoservicio: lectores de pago en cada lavadora y secadora, app para los clientes, recargas con bono y un portal con reportes en tiempo real."),
+    ("¿Qué es KioSoft?", "KioSoft es un sistema de cobro para lavanderías de autoservicio: un lector en cada lavadora y secadora, una app donde los clientes pagan y recargan saldo con bono, y un portal con las ventas en tiempo real."),
+    ("¿Mis clientes tienen que descargar una app?", "Sí. La descarga toma un minuto. En el lanzamiento capacitamos a tu personal y te damos material para que tus clientes la usen desde el primer día."),
     ("¿Funciona con mis lavadoras actuales?", "KioSoft es compatible con la mayoría de equipos comerciales de autoservicio. En el diagnóstico confirmamos marca y modelo antes de cotizar."),
-    ("¿Puedo seguir aceptando efectivo?", "Sí. Puedes dejar un punto de recarga en mostrador para quien prefiera pagar en efectivo, y el saldo se usa igual en las máquinas."),
+    ("¿Puedo seguir cobrando en mostrador?", "Sí. Tu personal puede recargar saldo a quien lo pida en mostrador, y el cliente usa ese saldo en las máquinas."),
     ("¿Cuánto tarda la instalación?", "Depende del número de equipos. La programamos para no frenar tu operación y te damos el calendario en la propuesta."),
     ("¿Trabajan en todo México?", "Sí. La configuración del portal, precios y promociones la hacemos a distancia, y la instalación en sitio se agenda en tu ciudad."),
+    ("¿Lavaforte es KioSoft?", "No. Lavaforte opera lavanderías de autoservicio en León y usa KioSoft en ellas. Instalamos y configuramos KioSoft para otros dueños; KioSoft es una marca de su fabricante."),
 ]
 FAQ_INV = [
     ("¿Cuánto se necesita para invertir?", "Depende del tamaño del local y del número de equipos. Te compartimos los escenarios en el dossier y en una reunión uno a uno."),
@@ -429,7 +419,7 @@ def page_index():
 def page_tecnico():
     b = read("servicio-tecnico.main.html")
     b = replace_faq(b, FAQ_TECNICO)
-    b = b.replace("{{SERVICIOS}}", services_block()).replace("{{PROCESO}}", PROCESS).replace("{{EVENTO}}", POR_EVENTO)
+    b = b.replace("{{SERVICIOS}}", services_block()).replace("{{PROCESO}}", PROCESS)
     return imgs(b.replace("{{CONTACTO}}", contact_form("", "Hola Lavaforte, necesito servicio técnico para equipo de lavandería.")))
 
 def page_kiosoft():
@@ -444,27 +434,27 @@ LOCAL_BRANCHES = [branch_schema(k, v) for k, v in SUCURSALES.items()]
 
 PAGES = [
     dict(file="index.html", nav="clientes", strip="tecnico", body=page_index, wa="Hola Lavaforte, quiero información.",
-         title="Lavandería en León 24 h con app · Lavaforte Lavanderías",
-         desc="Lavandería de autoservicio 24 h con app, lavado por encargo desde $30/kg, planchado, edredones y tintorería en León, Gto. Sucursales San Juan Bosco, Cañaveral y Hermenegildo Bustos.",
-         schema=lambda: [ORG] + LOCAL_BRANCHES + [faq_schema(FAQ_INDEX)], priority="1.0"),
-    dict(file="servicio-tecnico.html", nav="tecnico", strip=None, dock=("Cotizar", "#contacto"), body=page_tecnico, wa="Hola Lavaforte, necesito servicio técnico para equipo de lavandería.",
-         title="Reparación de lavadoras y secadoras industriales en León | Lavaforte",
-         desc="Servicio técnico por evento para lavanderías de hotel, hospital y autoservicio en León: reparación de lavadoras, secadoras y planchadoras industriales, refacciones e instalación.",
+         title="Lavandería de autoservicio con app en León | Lavaforte",
+         desc="Lava cuando puedas: autoservicio con app (24 h en dos sucursales), encargo desde $30/kg, planchado y edredones. 3 sucursales en León, Gto.",
+         schema=lambda: [{"@type": "WebSite", "@id": SITE + "#web", "url": SITE, "name": "Lavaforte Lavanderías", "inLanguage": "es-MX", "publisher": {"@id": SITE + "#org"}}, ORG] + LOCAL_BRANCHES + [faq_schema(FAQ_INDEX)], priority="1.0"),
+    dict(file="servicio-tecnico.html", nav="tecnico", strip=None, dock=("Cotizar", "#contacto"), og_image="hero-tecnico", body=page_tecnico, wa="Hola Lavaforte, necesito servicio técnico para equipo de lavandería.",
+         title="Reparación de lavadoras industriales en León | Lavaforte",
+         desc="Reparamos lavadoras, secadoras y planchadoras de hoteles, hospitales y lavanderías de autoservicio en León. Cotización antes de reparar y factura.",
          schema=lambda: [ORG, {"@type": "Service", "name": "Reparación de equipo de lavandería industrial y de autoservicio",
-                                "serviceType": "Reparación de lavadoras y secadoras industriales", "provider": {"@id": SITE + "#org"},
+                                "serviceType": "Reparación de lavadoras y secadoras industriales", "description": "Diagnóstico en sitio, cotización antes de reparar, reparación, refacciones, instalación y reubicación de lavadoras, secadoras y planchadoras industriales y de autoservicio.", "provider": {"@id": SITE + "#org"},
                                 "areaServed": {"@type": "City", "name": "León, Guanajuato"},
                                 "audience": [{"@type": "BusinessAudience", "name": n} for n in ["Hoteles", "Hospitales", "Lavanderías de autoservicio"]]},
                           faq_schema(FAQ_TECNICO), crumbs(("Inicio", ""), ("Servicio técnico", "servicio-tecnico.html"))], priority="0.9"),
-    dict(file="kiosoft.html", nav="kiosoft", strip=None, dock=("Cotizar", "#cotiza"), body=page_kiosoft, wa="Hola Lavaforte, quiero cotizar la instalación de KioSoft.",
-         title="Instalación de KioSoft para lavanderías en México | Lavaforte",
-         desc="Instalamos y configuramos KioSoft en lavanderías de autoservicio de todo México: cobro sin efectivo con app y tarjeta, recargas con bono y reportes en tiempo real.",
+    dict(file="kiosoft.html", nav="kiosoft", strip=None, dock=("Cotizar", "#cotiza"), og_image="hero-kiosoft", body=page_kiosoft, wa="Hola Lavaforte, quiero cotizar la instalación de KioSoft.",
+         title="Instalación de KioSoft para lavanderías | Lavaforte",
+         desc="Instalamos KioSoft en lavanderías de autoservicio de todo México: tus clientes pagan desde la app, recargan con bono y tú ves tus ventas en vivo.",
          schema=lambda: [ORG, {"@type": "Service", "name": "Instalación y configuración de KioSoft para lavanderías",
-                                "serviceType": "Sistema de cobro sin efectivo para lavanderías", "provider": {"@id": SITE + "#org"},
+                                "serviceType": "Sistema de cobro por app para lavanderías de autoservicio", "description": "Instalación de lectores KioSoft en lavadoras y secadoras, configuración de la app de pago, recargas con bono, precios y portal de ventas. Lavaforte es instalador; KioSoft es marca de su fabricante.", "provider": {"@id": SITE + "#org"},
                                 "areaServed": {"@type": "Country", "name": "México"}},
                           faq_schema(FAQ_KIOSOFT), crumbs(("Inicio", ""), ("KioSoft", "kiosoft.html"))], priority="0.9"),
-    dict(file="inversionistas.html", nav="inversion", strip="kiosoft", dock=("Dossier", "#contacto"), body=page_inv, wa="Hola Lavaforte, me interesa invertir.",
+    dict(file="inversionistas.html", nav="inversion", strip="kiosoft", dock=("Dossier", "#contacto"), og_image="hero-inversion", body=page_inv, wa="Hola Lavaforte, me interesa invertir.",
          title="Invierte en lavanderías de autoservicio | Lavaforte",
-         desc="Lavaforte desarrolla y opera lavanderías de autoservicio con cobro 100% digital en León. Conoce el modelo de inversión y solicita el dossier.",
+         desc="Lavaforte desarrolla y opera lavanderías de autoservicio con cobro por app en León. Conoce el modelo de inversión y pide el dossier.",
          schema=lambda: [ORG, faq_schema(FAQ_INV), crumbs(("Inicio", ""), ("Inversionistas", "inversionistas.html"))], priority="0.6"),
 ]
 for k, s in SEGMENTOS.items():
@@ -477,8 +467,8 @@ for k, s in SEGMENTOS.items():
 for k, b in SUCURSALES.items():
     PAGES.append(dict(file="sucursal-%s.html" % k, nav="sucursales", strip="tecnico", dock=("Cómo llegar", "https://www.google.com/maps/search/?api=1&amp;query=" + b["maps"]), body=(lambda k=k, b=b: branch_body(k, b)),
                       wa="Hola Lavaforte %s, quiero información." % b["name"],
-                      title="Lavandería en %s, León · Lavaforte %s" % (b["zona"], b["name"]),
-                      desc="Lavaforte %s: lavandería de autoservicio con app, encargo desde $30/kg, planchado y edredones en %s, León. Horarios, ubicación y cómo llegar." % (b["name"], b["street"]),
+                      title="Lavandería en %s, León | Lavaforte" % b["name"],
+                      desc="Lavaforte %s: autoservicio con app, encargo desde $30/kg, planchado y edredones en %s, León. Horario y cómo llegar." % (b["name"], b["zona"]),
                       priority="0.8",
                       schema=(lambda k=k, b=b: [branch_schema(k, b), faq_schema(branch_faq(b)),
                                                 crumbs(("Inicio", ""), ("Sucursales", "index.html#sucursales"), (b["name"], "sucursal-%s.html" % k))])))
@@ -511,12 +501,14 @@ HEAD = '''<!DOCTYPE html>
 </head>
 '''
 
+TODAY = __import__("datetime").date.today().isoformat()
+
 def build():
     header = read("_header.html"); footer = read("_footer.html")
     urls = []
     for p in PAGES:
         url = SITE + ("" if p["file"] == "index.html" else p["file"])
-        og = p.get("og_image")
+        og = p.get("og_image", "hero-clientes")
         og_url = (img(og) if REMOTE else SITE + img(og)) if og else SITE + "assets/img/lavaforte-logo-180.png"
         ld = json.dumps({"@context": "https://schema.org", "@graph": p["schema"]()}, ensure_ascii=False)
         h = header.replace("{{STRIP}}", STRIPS[p["strip"]]).replace("{{WA}}", html.escape(p["wa"]))
@@ -526,7 +518,7 @@ def build():
         urls.append((url, p["priority"]))
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u, pr in urls:
-        sm.append("  <url><loc>%s</loc><changefreq>monthly</changefreq><priority>%s</priority></url>" % (u, pr))
+        sm.append("  <url><loc>%s</loc><lastmod>%s</lastmod><changefreq>monthly</changefreq><priority>%s</priority></url>" % (u, TODAY, pr))
     sm.append("</urlset>")
     open(os.path.join(ROOT, "sitemap.xml"), "w").write("\n".join(sm) + "\n")
     print("ok:", len(PAGES), "páginas", "(imágenes remotas)" if REMOTE else "")
