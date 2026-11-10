@@ -390,12 +390,12 @@ FAQ_TECNICO = [
     ("¿Cómo se cobra el servicio?", "Pagas cada servicio: la visita de diagnóstico y, si apruebas la cotización, la reparación y las refacciones. Todo con factura."),
 ]
 FAQ_KIOSOFT = [
-    ("¿Qué es KioSoft?", "KioSoft es un sistema de cobro para lavanderías de autoservicio: un lector en cada lavadora y secadora, una app donde los clientes pagan y recargan saldo con bono, y un portal con las ventas en tiempo real."),
+    ("¿Qué es KioSoft?", "KioSoft es un sistema de cobro para lavanderías de autoservicio: un lector en cada lavadora y secadora, un punto de venta para recargar en mostrador y una app donde los clientes pagan y recargan saldo con bono."),
     ("¿Mis clientes tienen que descargar una app?", "Sí. La descarga toma un minuto. En el lanzamiento capacitamos a tu personal y te damos material para que tus clientes la usen desde el primer día."),
     ("¿Funciona con mis lavadoras actuales?", "KioSoft es compatible con la mayoría de equipos comerciales de autoservicio. En el diagnóstico confirmamos marca y modelo antes de cotizar."),
     ("¿Puedo seguir cobrando en mostrador?", "Sí. Tu personal puede recargar saldo a quien lo pida en mostrador, y el cliente usa ese saldo en las máquinas."),
     ("¿Cuánto tarda la instalación?", "Depende del número de equipos. La programamos para no frenar tu operación y te damos el calendario en la propuesta."),
-    ("¿Trabajan en todo México?", "Sí. La configuración del portal, precios y promociones la hacemos a distancia, y la instalación en sitio se agenda en tu ciudad."),
+    ("¿Trabajan en todo México?", "Sí. La configuración de precios y promociones la hacemos a distancia, y la instalación en sitio se agenda en tu ciudad."),
     ("¿Lavaforte es KioSoft?", "No. Lavaforte opera lavanderías de autoservicio en León y usa KioSoft en ellas. Instalamos y configuramos KioSoft para otros dueños; KioSoft es una marca de su fabricante."),
 ]
 FAQ_INV = [
@@ -447,9 +447,9 @@ PAGES = [
                           faq_schema(FAQ_TECNICO), crumbs(("Inicio", ""), ("Servicio técnico", "servicio-tecnico.html"))], priority="0.9"),
     dict(file="kiosoft.html", nav="kiosoft", strip=None, dock=("Cotizar", "#cotiza"), og_image="hero-kiosoft", body=page_kiosoft, wa="Hola Lavaforte, quiero cotizar la instalación de KioSoft.",
          title="Instalación de KioSoft para lavanderías | Lavaforte",
-         desc="Instalamos KioSoft en lavanderías de autoservicio de todo México: tus clientes pagan desde la app, recargan con bono y tú ves tus ventas en vivo.",
+         desc="Instalamos KioSoft en lavanderías de autoservicio de todo México: tus clientes pagan desde la app, recargan con bono y tu lavandería vende las 24 h.",
          schema=lambda: [ORG, {"@type": "Service", "name": "Instalación y configuración de KioSoft para lavanderías",
-                                "serviceType": "Sistema de cobro por app para lavanderías de autoservicio", "description": "Instalación de lectores KioSoft en lavadoras y secadoras, configuración de la app de pago, recargas con bono, precios y portal de ventas. Lavaforte es instalador; KioSoft es marca de su fabricante.", "provider": {"@id": SITE + "#org"},
+                                "serviceType": "Sistema de cobro por app para lavanderías de autoservicio", "description": "Instalación de lectores KioSoft en lavadoras y secadoras, configuración de la app de pago, recargas con bono, y precios. Lavaforte es instalador; KioSoft es marca de su fabricante.", "provider": {"@id": SITE + "#org"},
                                 "areaServed": {"@type": "Country", "name": "México"}},
                           faq_schema(FAQ_KIOSOFT), crumbs(("Inicio", ""), ("KioSoft", "kiosoft.html"))], priority="0.9"),
     dict(file="inversionistas.html", nav="inversion", strip="kiosoft", dock=("Dossier", "#contacto"), og_image="hero-inversion", body=page_inv, wa="Hola Lavaforte, me interesa invertir.",
