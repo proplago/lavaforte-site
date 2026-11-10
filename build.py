@@ -35,8 +35,8 @@ IMAGES = {  # nombre local → archivo generado en Higgsfield
     "hero-tecnico": "hf_20261110_001744_15467c5d-025a-413d-beab-e7a330365975.png",
     "hero-kiosoft": "hf_20261110_001808_04622db4-12ed-456f-b8bc-1ac47d13b2c0.png",
     "hero-inversion": "hf_20261110_001820_16e51f18-09dc-4fc7-997f-24c83da3ff89.png",
-    "kiosoft-tarjeta": "hf_20261110_001744_0cae3c27-b8ac-4d49-97b7-41d3bf77a969.png",
-    "kiosoft-kiosco": "hf_20261110_001745_7072f1a7-ca5a-428c-9d42-4cfa43ea10d8.png",
+    "kiosoft-lector": "hf_20261110_185845_e45899c4-e682-4e7f-82f1-7c890290c714.png",
+    "kiosoft-kiosco": "hf_20261110_185847_2b6dacf9-4b1a-4552-91d4-8a59f02c2614.png",
     "kiosoft-instalacion": "hf_20261110_001808_b42160f6-80f8-406a-9e00-7a52ec1f21a3.png",
     "burbujas": "hf_20261110_001820_946044ae-c331-4819-85ba-1678bd212d62.png",
     "planchado": "hf_20261110_001918_4d06b1d2-4c39-4d94-8c65-61c84c9abe0d.png",
@@ -396,7 +396,8 @@ FAQ_KIOSOFT = [
     ("¿Puedo seguir cobrando en mostrador?", "Sí. Tu personal puede recargar saldo a quien lo pida en mostrador, y el cliente usa ese saldo en las máquinas."),
     ("¿Cuánto tarda la instalación?", "Depende del número de equipos. La programamos para no frenar tu operación y te damos el calendario en la propuesta."),
     ("¿Trabajan en todo México?", "Sí. La configuración de precios y promociones la hacemos a distancia, y la instalación en sitio se agenda en tu ciudad."),
-    ("¿Lavaforte es KioSoft?", "No. Lavaforte opera lavanderías de autoservicio en León y usa KioSoft en ellas. Instalamos y configuramos KioSoft para otros dueños; KioSoft es una marca de su fabricante."),
+    ("¿KioSoft y PayRange son lo mismo?", "Sí. KioSoft ahora forma parte de PayRange. Instalamos y configuramos sus lectores, puntos de venta y app de pago."),
+    ("¿Lavaforte es KioSoft?", "No. Lavaforte opera lavanderías de autoservicio en León y usa KioSoft en ellas. Instalamos y configuramos KioSoft (PayRange) para otros dueños; KioSoft y PayRange son marcas de su fabricante."),
 ]
 FAQ_INV = [
     ("¿Cuánto se necesita para invertir?", "Depende del tamaño del local y del número de equipos. Te compartimos los escenarios en el dossier y en una reunión uno a uno."),
