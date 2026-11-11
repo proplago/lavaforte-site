@@ -10,7 +10,9 @@
     provisional: true,
     whatsapp: "524779075087",          // WhatsApp único (solo mensajes)
     whatsappDisplay: "477 907 5087",
-    appUrl: null,                      // ← enlace de descarga de la app (pendiente)
+    appName: "KioSoft Wash",
+    appIos: "https://apps.apple.com/mx/app/kiosoft-wash/id6458121942",
+    appAndroid: "https://play.google.com/store/apps/details?id=com.kiosoft.kiosoftwash",
     social: {
       instagram: "https://www.instagram.com/lavaforte_lavanderias",
       tiktok: "https://www.tiktok.com/@lavaforte_lavanderias",
@@ -36,8 +38,13 @@
     var u = CONFIG.social[a.getAttribute("data-social")];
     if (u) { a.href = u; a.target = "_blank"; a.rel = "noopener"; }
   });
+  // Descarga de la app: [data-app] elige la tienda según el celular;
+  // [data-app="ios"] / [data-app="android"] fijan la tienda.
+  var isIOS = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && !/Android/.test(navigator.userAgent);
   document.querySelectorAll("[data-app]").forEach(function (a) {
-    if (CONFIG.appUrl) { a.href = CONFIG.appUrl; a.target = "_blank"; a.rel = "noopener"; }
+    var which = a.getAttribute("data-app");
+    var url = which === "ios" ? CONFIG.appIos : which === "android" ? CONFIG.appAndroid : (isIOS ? CONFIG.appIos : CONFIG.appAndroid);
+    a.href = url; a.target = "_blank"; a.rel = "noopener";
   });
 
   // Navegación móvil

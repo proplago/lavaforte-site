@@ -230,3 +230,12 @@ img.is-broken{opacity:0}
 .reader-real{width:min(100%,380px);height:auto;margin-inline:auto;display:block;filter:drop-shadow(0 18px 30px rgba(0,16,64,.25));animation:float 5s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @media (prefers-reduced-motion:reduce){.reader-real{animation:none}}
+/* Botones de tiendas de apps */
+.stores{display:flex;flex-wrap:wrap;gap:12px}
+.store{display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:8px 20px 8px 16px;border-radius:14px;background:#000;color:#fff;text-decoration:none;font-family:var(--font-display);font-weight:800;font-size:1.1rem;line-height:1.1;border:1px solid rgba(255,255,255,.25);transition:transform var(--transition)}
+.store:hover{transform:translateY(-2px)}
+.store svg{width:26px;height:26px;flex:0 0 26px}
+.store small{display:block;font-family:var(--font-body,inherit);font-weight:500;font-size:.72rem;opacity:.85}
+.app-cta{margin-top:26px;display:flex;flex-direction:column;gap:12px}
+.app-cta p{margin:0}
+@media (max-width:420px){.stores .store{flex:1 1 100%;justify-content:center}}

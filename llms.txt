@@ -1,9 +1,9 @@
 # Lavaforte Lavanderías
 
-> Lavaforte es una cadena de lavanderías de autoservicio en León, Guanajuato, México. Sus clientes pagan las lavadoras y secadoras con la app de Lavaforte. También ofrece lavado por encargo, planchado, edredones y tintorería. Además repara equipo de lavandería para hoteles, hospitales y lavanderías de autoservicio en León, e instala el sistema de cobro por app KioSoft en lavanderías de todo México.
+> Lavaforte es una cadena de lavanderías de autoservicio en León, Guanajuato, México. Sus clientes pagan las lavadoras y secadoras con la app KioSoft Wash. También ofrece lavado por encargo, planchado, edredones y tintorería. Además repara equipo de lavandería para hoteles, hospitales y lavanderías de autoservicio en León, e instala el sistema de cobro por app KioSoft en lavanderías de todo México.
 
 ## Datos clave
-- Pago del autoservicio: con la app de Lavaforte. El saldo se recarga en la app o en mostrador. Bono de recarga: $150 → $165, $250 → $290, $350 → $420, $500 → $625, $700 → $910 (hasta 30% extra). Recarga mínima $100. El saldo no vence y sirve en todas las sucursales.
+- Pago del autoservicio: con la app KioSoft Wash, gratis en App Store (https://apps.apple.com/mx/app/kiosoft-wash/id6458121942) y Google Play (https://play.google.com/store/apps/details?id=com.kiosoft.kiosoftwash). El saldo se recarga en la app o en mostrador. Bono de recarga: $150 → $165, $250 → $290, $350 → $420, $500 → $625, $700 → $910 (hasta 30% extra). Recarga mínima $100. El saldo no vence y sirve en todas las sucursales.
 - Lavado por encargo: desde $30 por kilo, mínimo 3 kg.
 - Autoservicio 24 horas: sucursales San Juan Bosco y Cañaveral.
 - Contacto: WhatsApp +52 477 907 5087 (mensajes, lunes a viernes de 9:00 a 18:00). Oficina: Manantial 806-B, Valle del Campestre, León, Gto.

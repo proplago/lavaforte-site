@@ -330,6 +330,12 @@ def branch_body(key, b):
         </div>
         <div class="rail" style="--cols:4" data-stagger>%(tiles)s</div>
         <p class="swipe-hint">Desliza</p>
+        <div class="app-cta" data-reveal><p><b>Paga el autoservicio con la app KioSoft Wash.</b> Descárgala gratis:</p>
+          <div class="stores">
+            <a class="store" href="https://apps.apple.com/mx/app/kiosoft-wash/id6458121942" data-app="ios" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.2 1-4 2.5-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.5-1-2.5-4zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg><span><small>Descárgala en</small>App Store</span></a>
+            <a class="store" href="https://play.google.com/store/apps/details?id=com.kiosoft.kiosoftwash" data-app="android" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.6 1.8c-.3.3-.4.7-.4 1.2v18c0 .5.1.9.4 1.2l10-10.2-10-10.2zm11.1 11.3l2.8 2.8-11.8 6.7c-.4.2-.8.3-1.1.2l10.1-9.7zm0-2.2L4.6 1.2c.3-.1.7 0 1.1.2l11.8 6.7-2.8 2.8zm3.9-1.9l3 1.7c.9.5.9 1.3 0 1.8l-3 1.7-3-3 3-2.2z"/></svg><span><small>Disponible en</small>Google Play</span></a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -360,7 +366,7 @@ def branch_faq(b):
     h = "; ".join("%s de %s" % x for x in b["hours"])
     return [("¿Qué horario tiene Lavaforte %s?" % b["name"], "El mostrador atiende %s. %s." % (h, b["badge"])),
             ("¿Dónde está Lavaforte %s?" % b["name"], "En %s, C.P. %s, León, Guanajuato." % (b["street"], b["cp"])),
-            ("¿Cómo pago el autoservicio?", "Con la app de Lavaforte: recargas saldo, eliges tu máquina y arranca. Al recargar recibes hasta 30% de saldo extra."),
+            ("¿Cómo pago el autoservicio?", "Con la app KioSoft Wash (App Store y Google Play): recargas saldo, eliges tu máquina y arranca. Al recargar recibes hasta 30% de saldo extra."),
             ("¿Cuánto cuesta el lavado por encargo?", "Desde $30 por kilo con carga mínima de 3 kg. Escríbenos por WhatsApp al 477 907 5087 para precios de planchado y edredones.")]
 
 def branch_schema(key, b):
@@ -375,7 +381,7 @@ def branch_schema(key, b):
 
 # ---------------------------------------------------------------- FAQ de páginas "a mano"
 FAQ_INDEX = [
-    ("¿Cómo funciona el autoservicio?", "Con la app de Lavaforte: descargas la app, recargas saldo y eliges tu máquina desde el celular. La app te avisa cuando termina tu ciclo."),
+    ("¿Cómo funciona el autoservicio?", "Con la app KioSoft Wash: la descargas gratis en App Store o Google Play, recargas saldo y eliges tu máquina desde el celular. La app te avisa cuando termina tu ciclo."),
     ("¿Puedo recargar saldo en mostrador?", "Sí. En horario de mostrador te ayudamos a recargar y a usar la app la primera vez."),
     ("¿Necesito llevar detergente?", "Nuestras lavadoras son de alta eficiencia y funcionan con detergente HE. Si no traes, pregunta en mostrador."),
     ("¿Cuánto cuesta lavar por encargo?", "Desde $30 por kilo con carga mínima de 3 kg. Te confirmamos la hora de entrega por WhatsApp."),
