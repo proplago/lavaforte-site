@@ -10,6 +10,11 @@
     provisional: true,
     whatsapp: "524779075087",          // WhatsApp único (solo mensajes)
     whatsappDisplay: "477 907 5087",
+    // Línea directa (Fernando) para KioSoft y servicio técnico. Vacío = usa la general.
+    whatsappDirect: "",
+    // Google Ads: id "AW-…" y una etiqueta de conversión por tipo de página.
+    // Mientras id esté vacío no se carga ningún script de Google.
+    ads: { id: "AW-11035918867", labels: { kiosoft: "CGm_CIPp2LYdEJOEq44p", tecnico: "SGtNCIbp2LYdEJOEq44p" } },
     appName: "KioSoft Wash",
     appIos: "https://apps.apple.com/mx/app/kiosoft-wash/id6458121942",
     appAndroid: "https://play.google.com/store/apps/details?id=com.kiosoft.kiosoftwash",
@@ -23,9 +28,35 @@
 
   if (!CONFIG.provisional) document.documentElement.classList.add("is-final");
 
+  var PAGE = window.LF_PAGE || {};
+  var WA_NUMBER = (PAGE.line === "directo" && CONFIG.whatsappDirect) ? CONFIG.whatsappDirect : CONFIG.whatsapp;
   function waLink(text) {
-    return "https://wa.me/" + CONFIG.whatsapp + (text ? "?text=" + encodeURIComponent(text) : "");
+    return "https://wa.me/" + WA_NUMBER + (text ? "?text=" + encodeURIComponent(text) : "");
   }
+
+  // Medición: Google tag solo si hay id de Google Ads. Cada clic a WhatsApp
+  // cuenta como conversión del tipo de página (kiosoft / tecnico).
+  var gtagReady = false;
+  if (CONFIG.ads.id) {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", CONFIG.ads.id);
+    var gs = document.createElement("script");
+    gs.async = true; gs.src = "https://www.googletagmanager.com/gtag/js?id=" + CONFIG.ads.id;
+    document.head.appendChild(gs);
+    gtagReady = true;
+  }
+  function trackWhatsApp() {
+    if (!gtagReady) return;
+    window.gtag("event", "whatsapp_click", { page_type: PAGE.conv || "otro" });
+    var label = PAGE.conv && CONFIG.ads.labels[PAGE.conv];
+    if (label) window.gtag("event", "conversion", { send_to: CONFIG.ads.id + "/" + label });
+  }
+  document.addEventListener("click", function (ev) {
+    var a = ev.target.closest && ev.target.closest('a[href*="wa.me/"]');
+    if (a) trackWhatsApp();
+  }, true);
 
 
   // Enlaces de WhatsApp con mensaje según la página
@@ -109,6 +140,7 @@
         var name = label ? label.firstChild.textContent.trim() : f.name;
         lines.push("• " + name + ": " + f.value.trim());
       });
+      trackWhatsApp();
       window.open(waLink(lines.join("\n")), "_blank", "noopener");
     });
   });

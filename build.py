@@ -444,7 +444,7 @@ PAGES = [
          title="Lavandería de autoservicio con app en León | Lavaforte",
          desc="Lava cuando puedas: autoservicio con app (24 h en dos sucursales), encargo desde $30/kg, planchado y edredones. 3 sucursales en León, Gto.",
          schema=lambda: [{"@type": "WebSite", "@id": SITE + "#web", "url": SITE, "name": "Lavaforte Lavanderías", "inLanguage": "es-MX", "publisher": {"@id": SITE + "#org"}}, ORG] + LOCAL_BRANCHES + [faq_schema(FAQ_INDEX)], priority="1.0"),
-    dict(file="servicio-tecnico.html", nav="tecnico", strip=None, dock=("Cotizar", "#contacto"), og_image="hero-tecnico", body=page_tecnico, wa="Hola Lavaforte, necesito servicio técnico para equipo de lavandería.",
+    dict(file="servicio-tecnico.html", nav="tecnico", strip=None, dock=("Cotizar", "#contacto"), og_image="hero-tecnico", body=page_tecnico, conv="tecnico", wa="Hola Lavaforte, necesito servicio técnico para equipo de lavandería.",
          title="Reparación de lavadoras industriales en León | Lavaforte",
          desc="Reparamos lavadoras, secadoras y planchadoras de hoteles, hospitales y lavanderías de autoservicio en León. Cotización antes de reparar y factura.",
          schema=lambda: [ORG, {"@type": "Service", "name": "Reparación de equipo de lavandería industrial y de autoservicio",
@@ -452,7 +452,7 @@ PAGES = [
                                 "areaServed": {"@type": "City", "name": "León, Guanajuato"},
                                 "audience": [{"@type": "BusinessAudience", "name": n} for n in ["Hoteles", "Hospitales", "Lavanderías de autoservicio"]]},
                           faq_schema(FAQ_TECNICO), crumbs(("Inicio", ""), ("Servicio técnico", "servicio-tecnico.html"))], priority="0.9"),
-    dict(file="kiosoft.html", nav="kiosoft", strip=None, dock=("Cotizar", "#cotiza"), og_image="hero-kiosoft", body=page_kiosoft, wa="Hola Lavaforte, quiero cotizar la instalación de KioSoft.",
+    dict(file="kiosoft.html", nav="kiosoft", strip=None, dock=("Cotizar", "#cotiza"), og_image="hero-kiosoft", body=page_kiosoft, conv="kiosoft", wa="Hola Lavaforte, quiero cotizar la instalación de KioSoft.",
          title="Instalación de KioSoft by PayRange en lavanderías | Lavaforte",
          desc="Instalamos KioSoft by PayRange en lavanderías de autoservicio de todo México: tus clientes pagan desde la app, recargan con bono y tu lavandería vende las 24 h.",
          schema=lambda: [ORG, {"@type": "Service", "name": "Instalación y configuración de KioSoft by PayRange para lavanderías",
@@ -465,7 +465,7 @@ PAGES = [
          schema=lambda: [ORG, faq_schema(FAQ_INV), crumbs(("Inicio", ""), ("Inversionistas", "inversionistas.html"))], priority="0.6"),
 ]
 for k, s in SEGMENTOS.items():
-    PAGES.append(dict(file=s["slug"] + ".html", nav="tecnico", strip=None, dock=("Cotizar", "#contacto"), body=(lambda s=s: segment_body(s)), wa=s["wa"],
+    PAGES.append(dict(file=s["slug"] + ".html", nav="tecnico", strip=None, dock=("Cotizar", "#contacto"), body=(lambda s=s: segment_body(s)), conv="tecnico", wa=s["wa"],
                       title=s["title"], desc=s["desc"], og_image=s["img"], priority="0.8",
                       schema=(lambda s=s: [ORG, {"@type": "Service", "name": re.sub("<[^>]+>", "", s["h1"]), "provider": {"@id": SITE + "#org"},
                                                  "areaServed": {"@type": "City", "name": "León, Guanajuato"}},
@@ -485,7 +485,7 @@ HEAD = '''<!DOCTYPE html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>document.documentElement.classList.add("js");</script>
+  <script>document.documentElement.classList.add("js");window.LF_PAGE=%(page)s;</script>
   <title>%(title)s</title>
   <meta name="description" content="%(desc)s" />
   <link rel="canonical" href="%(url)s" />
@@ -520,7 +520,8 @@ def build():
         ld = json.dumps({"@context": "https://schema.org", "@graph": p["schema"]()}, ensure_ascii=False)
         h = header.replace("{{STRIP}}", STRIPS[p["strip"]]).replace("{{WA}}", html.escape(p["wa"]))
         h = h.replace('data-nav="%s"' % p["nav"], 'data-nav="%s" aria-current="page"' % p["nav"])
-        out = HEAD % dict(title=html.escape(p["title"]), desc=html.escape(p["desc"]), url=url, og=og_url, ld=ld) + h + p["body"]() + footer.replace("{{WA}}", html.escape(p["wa"])).replace("{{DOCK_LABEL}}", p.get("dock", ("Sucursales", "index.html#sucursales"))[0]).replace("{{DOCK_HREF}}", p.get("dock", ("Sucursales", "index.html#sucursales"))[1])
+        page = json.dumps({"line": "directo" if p.get("conv") else "general", "conv": p.get("conv", "")})
+        out = HEAD % dict(page=page, title=html.escape(p["title"]), desc=html.escape(p["desc"]), url=url, og=og_url, ld=ld) + h + p["body"]() + footer.replace("{{WA}}", html.escape(p["wa"])).replace("{{DOCK_LABEL}}", p.get("dock", ("Sucursales", "index.html#sucursales"))[0]).replace("{{DOCK_HREF}}", p.get("dock", ("Sucursales", "index.html#sucursales"))[1])
         open(os.path.join(ROOT, p["file"]), "w").write(out)
         urls.append((url, p["priority"]))
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
