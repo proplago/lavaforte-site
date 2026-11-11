@@ -20,7 +20,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Herramientas de imagen
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq webp
+        # Usa Pillow (pip) en vez de apt: los espejos de Ubuntu fallan a veces.
+        run: |
+          pip install -q pillow
+          mkdir -p "$HOME/bin"
+          cat > "$HOME/bin/cwebp" <<'PY'
+          #!/usr/bin/env python3
+          # Mini cwebp: cwebp [-quiet] -q Q -resize W 0 entrada -o salida
+          import sys
+          from PIL import Image
+          a = [x for x in sys.argv[1:] if x != "-quiet"]
+          q = int(a[a.index("-q") + 1]); w = int(a[a.index("-resize") + 1])
+          out = a[a.index("-o") + 1]; src = a[a.index("-resize") + 3]
+          im = Image.open(src).convert("RGB")
+          if w and im.width > w:
+              im = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
+          im.save(out, "WEBP", quality=q, method=6)
+          PY
+          chmod +x "$HOME/bin/cwebp"
+          echo "$HOME/bin" >> "$GITHUB_PATH"
       - name: Descargar fotos de Higgsfield y pasarlas a webp
         run: sh descargar-fotos.sh
       - name: Generar páginas con fotos locales
