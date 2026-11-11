@@ -14,7 +14,7 @@
     whatsappDirect: "",
     // Google Ads: id "AW-…" y una etiqueta de conversión por tipo de página.
     // Mientras id esté vacío no se carga ningún script de Google.
-    ads: { id: "", labels: { kiosoft: "", tecnico: "" } },
+    ads: { id: "AW-11035918867", labels: { kiosoft: "CGm_CIPp2LYdEJOEq44p", tecnico: "SGtNCIbp2LYdEJOEq44p" } },
     appName: "KioSoft Wash",
     appIos: "https://apps.apple.com/mx/app/kiosoft-wash/id6458121942",
     appAndroid: "https://play.google.com/store/apps/details?id=com.kiosoft.kiosoftwash",
