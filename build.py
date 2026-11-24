@@ -18,6 +18,12 @@ import json, os, re, sys, html
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = "https://www.lavaforte.com.mx/"
 WA = "524779075087"
+WA_DISPLAY = "477 907 5087"
+# Línea directa de Fernando (KioSoft). Debe coincidir con CONFIG.whatsappDirect en js/site.js.
+WA_DIRECT_DISPLAY = "477 729 0604"
+WA_DIRECT_TEL = "+52 477 729 0604"
+# Tipos de página (conv) cuyos contactos van a la línea directa.
+DIRECT_LINES = {"kiosoft"}
 REMOTE = "--remote-images" in sys.argv
 
 # ---------------------------------------------------------------- imágenes
@@ -457,6 +463,7 @@ PAGES = [
          desc="Instalamos KioSoft by PayRange en lavanderías de autoservicio de todo México: tus clientes pagan desde la app, recargan con bono y tu lavandería vende las 24 h.",
          schema=lambda: [ORG, {"@type": "Service", "name": "Instalación y configuración de KioSoft by PayRange para lavanderías",
                                 "serviceType": "Sistema de cobro por app para lavanderías de autoservicio", "description": "Instalación de lectores KioSoft en lavadoras y secadoras, configuración de la app de pago, recargas con bono, y precios. Lavaforte es instalador; KioSoft es marca de su fabricante.", "provider": {"@id": SITE + "#org"},
+                                "availableChannel": {"@type": "ServiceChannel", "name": "WhatsApp", "servicePhone": {"@type": "ContactPoint", "telephone": WA_DIRECT_TEL, "contactType": "sales", "contactOption": "WhatsApp", "availableLanguage": "es", "areaServed": "MX"}},
                                 "areaServed": {"@type": "Country", "name": "México"}},
                           faq_schema(FAQ_KIOSOFT), crumbs(("Inicio", ""), ("KioSoft", "kiosoft.html"))], priority="0.9"),
     dict(file="inversionistas.html", nav="inversion", strip="kiosoft", dock=("Dossier", "#contacto"), og_image="hero-inversion", body=page_inv, wa="Hola Lavaforte, me interesa invertir.",
@@ -520,8 +527,9 @@ def build():
         ld = json.dumps({"@context": "https://schema.org", "@graph": p["schema"]()}, ensure_ascii=False)
         h = header.replace("{{STRIP}}", STRIPS[p["strip"]]).replace("{{WA}}", html.escape(p["wa"]))
         h = h.replace('data-nav="%s"' % p["nav"], 'data-nav="%s" aria-current="page"' % p["nav"])
-        page = json.dumps({"line": "directo" if p.get("conv") else "general", "conv": p.get("conv", "")})
-        out = HEAD % dict(page=page, title=html.escape(p["title"]), desc=html.escape(p["desc"]), url=url, og=og_url, ld=ld) + h + p["body"]() + footer.replace("{{WA}}", html.escape(p["wa"])).replace("{{DOCK_LABEL}}", p.get("dock", ("Sucursales", "index.html#sucursales"))[0]).replace("{{DOCK_HREF}}", p.get("dock", ("Sucursales", "index.html#sucursales"))[1])
+        direct = p.get("conv") in DIRECT_LINES
+        page = json.dumps({"line": "directo" if direct else "general", "conv": p.get("conv", "")})
+        out = HEAD % dict(page=page, title=html.escape(p["title"]), desc=html.escape(p["desc"]), url=url, og=og_url, ld=ld) + h + p["body"]() + footer.replace("{{WA}}", html.escape(p["wa"])).replace("{{WA_DISPLAY}}", WA_DIRECT_DISPLAY if direct else WA_DISPLAY).replace("{{DOCK_LABEL}}", p.get("dock", ("Sucursales", "index.html#sucursales"))[0]).replace("{{DOCK_HREF}}", p.get("dock", ("Sucursales", "index.html#sucursales"))[1])
         open(os.path.join(ROOT, p["file"]), "w").write(out)
         urls.append((url, p["priority"]))
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
