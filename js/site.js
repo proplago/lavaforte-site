@@ -10,8 +10,10 @@
     provisional: true,
     whatsapp: "524779075087",          // WhatsApp único (solo mensajes)
     whatsappDisplay: "477 907 5087",
-    // Línea directa (Fernando) para KioSoft y servicio técnico. Vacío = usa la general.
-    whatsappDirect: "",
+    // Línea directa (Fernando). La usan las páginas que build.py marca como
+    // line "directo" (hoy solo KioSoft). Vacío = usa la general.
+    whatsappDirect: "524777290604",
+    whatsappDirectDisplay: "477 729 0604",
     // Google Ads: id "AW-…" y una etiqueta de conversión por tipo de página.
     // Mientras id esté vacío no se carga ningún script de Google.
     ads: { id: "AW-11035918867", labels: { kiosoft: "CGm_CIPp2LYdEJOEq44p", tecnico: "SGtNCIbp2LYdEJOEq44p" } },
@@ -29,7 +31,9 @@
   if (!CONFIG.provisional) document.documentElement.classList.add("is-final");
 
   var PAGE = window.LF_PAGE || {};
-  var WA_NUMBER = (PAGE.line === "directo" && CONFIG.whatsappDirect) ? CONFIG.whatsappDirect : CONFIG.whatsapp;
+  var IS_DIRECT = PAGE.line === "directo" && !!CONFIG.whatsappDirect;
+  var WA_NUMBER = IS_DIRECT ? CONFIG.whatsappDirect : CONFIG.whatsapp;
+  var WA_DISPLAY = IS_DIRECT ? CONFIG.whatsappDirectDisplay : CONFIG.whatsappDisplay;
   function waLink(text) {
     return "https://wa.me/" + WA_NUMBER + (text ? "?text=" + encodeURIComponent(text) : "");
   }
@@ -65,6 +69,7 @@
     a.target = "_blank";
     a.rel = "noopener";
   });
+  document.querySelectorAll("[data-wa-display]").forEach(function (el) { el.textContent = WA_DISPLAY; });
   document.querySelectorAll("[data-social]").forEach(function (a) {
     var u = CONFIG.social[a.getAttribute("data-social")];
     if (u) { a.href = u; a.target = "_blank"; a.rel = "noopener"; }
