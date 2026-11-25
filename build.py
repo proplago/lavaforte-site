@@ -19,11 +19,11 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = "https://www.lavaforte.com.mx/"
 WA = "524779075087"
 WA_DISPLAY = "477 907 5087"
-# Línea directa de Fernando (KioSoft). Debe coincidir con CONFIG.whatsappDirect en js/site.js.
+# Línea directa de Fernando (KioSoft y servicio técnico). Debe coincidir con CONFIG.whatsappDirect en js/site.js.
 WA_DIRECT_DISPLAY = "477 729 0604"
 WA_DIRECT_TEL = "+52 477 729 0604"
 # Tipos de página (conv) cuyos contactos van a la línea directa.
-DIRECT_LINES = {"kiosoft"}
+DIRECT_LINES = {"kiosoft", "tecnico"}
 REMOTE = "--remote-images" in sys.argv
 
 # ---------------------------------------------------------------- imágenes
@@ -455,6 +455,7 @@ PAGES = [
          desc="Reparamos lavadoras, secadoras y planchadoras de hoteles, hospitales y lavanderías de autoservicio en León. Cotización antes de reparar y factura.",
          schema=lambda: [ORG, {"@type": "Service", "name": "Reparación de equipo de lavandería industrial y de autoservicio",
                                 "serviceType": "Reparación de lavadoras y secadoras industriales", "description": "Diagnóstico en sitio, cotización antes de reparar, reparación, refacciones, instalación y reubicación de lavadoras, secadoras y planchadoras industriales y de autoservicio.", "provider": {"@id": SITE + "#org"},
+                                "availableChannel": {"@type": "ServiceChannel", "name": "WhatsApp", "servicePhone": {"@type": "ContactPoint", "telephone": WA_DIRECT_TEL, "contactType": "sales", "contactOption": "WhatsApp", "availableLanguage": "es", "areaServed": "León, Guanajuato"}},
                                 "areaServed": {"@type": "City", "name": "León, Guanajuato"},
                                 "audience": [{"@type": "BusinessAudience", "name": n} for n in ["Hoteles", "Hospitales", "Lavanderías de autoservicio"]]},
                           faq_schema(FAQ_TECNICO), crumbs(("Inicio", ""), ("Servicio técnico", "servicio-tecnico.html"))], priority="0.9"),
@@ -474,7 +475,7 @@ PAGES = [
 for k, s in SEGMENTOS.items():
     PAGES.append(dict(file=s["slug"] + ".html", nav="tecnico", strip=None, dock=("Cotizar", "#contacto"), body=(lambda s=s: segment_body(s)), conv="tecnico", wa=s["wa"],
                       title=s["title"], desc=s["desc"], og_image=s["img"], priority="0.8",
-                      schema=(lambda s=s: [ORG, {"@type": "Service", "name": re.sub("<[^>]+>", "", s["h1"]), "provider": {"@id": SITE + "#org"},
+                      schema=(lambda s=s: [ORG, {"@type": "Service", "name": re.sub("<[^>]+>", "", s["h1"]), "provider": {"@id": SITE + "#org"}, "availableChannel": {"@type": "ServiceChannel", "name": "WhatsApp", "servicePhone": {"@type": "ContactPoint", "telephone": WA_DIRECT_TEL, "contactType": "sales", "contactOption": "WhatsApp", "availableLanguage": "es", "areaServed": "León, Guanajuato"}},
                                                  "areaServed": {"@type": "City", "name": "León, Guanajuato"}},
                                            faq_schema(s["faq"]), crumbs(("Inicio", ""), ("Servicio técnico", "servicio-tecnico.html"),
                                                                         (s["eyebrow"].split(" · ")[0], s["slug"] + ".html"))])))

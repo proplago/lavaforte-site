@@ -11,7 +11,7 @@
     whatsapp: "524779075087",          // WhatsApp único (solo mensajes)
     whatsappDisplay: "477 907 5087",
     // Línea directa (Fernando). La usan las páginas que build.py marca como
-    // line "directo" (hoy solo KioSoft). Vacío = usa la general.
+    // line "directo" (KioSoft y servicio técnico). Vacío = usa la general.
     whatsappDirect: "524777290604",
     whatsappDirectDisplay: "477 729 0604",
     // Google Ads: id "AW-…" y una etiqueta de conversión por tipo de página.
