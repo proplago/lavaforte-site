@@ -46,7 +46,7 @@ jobs:
       - name: Armar carpeta pública
         run: |
           mkdir -p _site
-          cp -r *.html css js assets robots.txt llms.txt sitemap.xml _site/
+          cp -r *.html css js assets robots.txt llms.txt sitemap.xml 64c52c28cc2be5278b493b275eb80412.txt _site/
           [ -f CNAME ] && cp CNAME _site/ || true
       - uses: actions/upload-pages-artifact@v3
         with:

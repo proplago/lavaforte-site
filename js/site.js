@@ -16,7 +16,17 @@
     whatsappDirectDisplay: "477 729 0604",
     // Google Ads: id "AW-…" y una etiqueta de conversión por tipo de página.
     // Mientras id esté vacío no se carga ningún script de Google.
-    ads: { id: "AW-11035918867", labels: { kiosoft: "CGm_CIPp2LYdEJOEq44p", tecnico: "SGtNCIbp2LYdEJOEq44p" } },
+    // Google: una sola etiqueta (gtag.js) para Ads y Analytics 4.
+    // labels: conversión de Ads por tipo de contacto. "clientes" = WhatsApp desde
+    // páginas de lavandería; "direcciones" = clic en "Cómo llegar".
+    ads: { id: "AW-11035918867", labels: { kiosoft: "CGm_CIPp2LYdEJOEq44p", tecnico: "SGtNCIbp2LYdEJOEq44p",
+                                          clientes: "_oCMCPenm8AdEJOEq44p", direcciones: "LnBkCPqnm8AdEJOEq44p" } },
+    ga4: "G-GWDD6KWV5D",
+    // Meta: Pixel en el navegador + API de conversiones (servidor) con el mismo
+    // event_id para que Meta no cuente doble. Pixel vacío = no se carga nada.
+    meta: { pixel: "", capi: "https://bzyxiadoibukmzmgdnha.supabase.co/functions/v1/meta-capi" },
+    // TikTok Pixel: vacío = apagado. Prenderlo solo si se pautan anuncios en TikTok.
+    tiktok: "",
     appName: "KioSoft Wash",
     appIos: "https://apps.apple.com/mx/app/kiosoft-wash/id6458121942",
     appAndroid: "https://play.google.com/store/apps/details?id=com.kiosoft.kiosoftwash",
@@ -38,28 +48,112 @@
     return "https://wa.me/" + WA_NUMBER + (text ? "?text=" + encodeURIComponent(text) : "");
   }
 
-  // Medición: Google tag solo si hay id de Google Ads. Cada clic a WhatsApp
-  // cuenta como conversión del tipo de página (kiosoft / tecnico).
+  // ---------------------------------------------------------------- medición
+  // Un solo punto (track) manda cada acción a Google Analytics 4, a Google Ads
+  // y a Meta (Pixel + API de conversiones). Acciones que se miden:
+  //   whatsapp     → clic a WhatsApp            (GA4 contact_whatsapp · Meta Contact)
+  //   lead         → formulario enviado a WA     (GA4 generate_lead    · Meta Lead)
+  //   directions   → clic en "Cómo llegar"       (GA4 get_directions   · Meta FindLocation)
+  //   app          → clic a descargar la app     (GA4 app_download_click · Meta AppDownloadClick)
+  //   call         → clic a un teléfono          (GA4 click_to_call    · Meta Contact)
   var gtagReady = false;
-  if (CONFIG.ads.id) {
+  if (CONFIG.ads.id || CONFIG.ga4) {
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag("js", new Date());
-    window.gtag("config", CONFIG.ads.id);
+    if (CONFIG.ga4) window.gtag("config", CONFIG.ga4, { page_type: PAGE.conv || "clientes", branch: PAGE.branch || undefined });
+    if (CONFIG.ads.id) window.gtag("config", CONFIG.ads.id);
     var gs = document.createElement("script");
-    gs.async = true; gs.src = "https://www.googletagmanager.com/gtag/js?id=" + CONFIG.ads.id;
+    gs.async = true; gs.src = "https://www.googletagmanager.com/gtag/js?id=" + (CONFIG.ga4 || CONFIG.ads.id);
     document.head.appendChild(gs);
     gtagReady = true;
   }
-  function trackWhatsApp() {
-    if (!gtagReady) return;
-    window.gtag("event", "whatsapp_click", { page_type: PAGE.conv || "otro" });
-    var label = PAGE.conv && CONFIG.ads.labels[PAGE.conv];
-    if (label) window.gtag("event", "conversion", { send_to: CONFIG.ads.id + "/" + label });
+
+  function cookie(name) {
+    var m = document.cookie.match(new RegExp("(?:^|; )" + name + "=([^;]*)"));
+    return m ? decodeURIComponent(m[1]) : "";
   }
+  function eventId() {
+    return "lf." + Date.now().toString(36) + "." + Math.random().toString(36).slice(2, 10);
+  }
+  var metaReady = false;
+  if (CONFIG.meta.pixel) {
+    /* Código base del Pixel de Meta */
+    !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = "2.0"; n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s); }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+    window.fbq("init", CONFIG.meta.pixel);
+    metaReady = true;
+  }
+  // Envía el mismo evento a la API de conversiones (servidor). text/plain evita
+  // la verificación previa de CORS y sendBeacon sobrevive al cambio de página.
+  function capi(name, id, data) {
+    if (!metaReady || !CONFIG.meta.capi) return;
+    var fbc = cookie("_fbc");
+    var click = /[?&]fbclid=([^&#]+)/.exec(location.search);
+    if (!fbc && click) fbc = "fb.1." + Date.now() + "." + click[1];
+    var body = JSON.stringify({ event_name: name, event_id: id, event_source_url: location.href,
+      fbp: cookie("_fbp"), fbc: fbc, custom_data: data || {} });
+    try {
+      if (!(navigator.sendBeacon && navigator.sendBeacon(CONFIG.meta.capi, body)))
+        fetch(CONFIG.meta.capi, { method: "POST", body: body, keepalive: true, mode: "no-cors" });
+    } catch (e) {}
+  }
+  function meta(name, data, custom) {
+    if (!metaReady) return;
+    var id = eventId();
+    window.fbq(custom ? "trackCustom" : "track", name, data || {}, { eventID: id });
+    capi(name, id, data);
+  }
+  meta("PageView");
+
+  var ttReady = false;
+  if (CONFIG.tiktok) {
+    /* Código base del Pixel de TikTok */
+    !function (w, d, t) { w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || [];
+      ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie"];
+      ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))); }; };
+      for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
+      ttq.load = function (e, n) { var r = "https://analytics.tiktok.com/i18n/pixel/events.js"; ttq._i = ttq._i || {}; ttq._i[e] = []; ttq._i[e]._u = r;
+        ttq._t = ttq._t || {}; ttq._t[e] = +new Date(); ttq._o = ttq._o || {}; ttq._o[e] = n || {};
+        var o = d.createElement("script"); o.type = "text/javascript"; o.async = !0; o.src = r + "?sdkid=" + e + "&lib=" + t;
+        var a = d.getElementsByTagName("script")[0]; a.parentNode.insertBefore(o, a); };
+      ttq.load(CONFIG.tiktok); ttq.page(); }(window, document, "ttq");
+    ttReady = true;
+  }
+  var TT_EVENT = { whatsapp: "Contact", lead: "SubmitForm", directions: "FindLocation", app: "Download", call: "Contact" };
+
+  var GA_EVENT = { whatsapp: "contact_whatsapp", lead: "generate_lead", directions: "get_directions", app: "app_download_click", call: "click_to_call" };
+  var META_EVENT = { whatsapp: ["Contact"], lead: ["Lead"], directions: ["FindLocation"], app: ["AppDownloadClick", true], call: ["Contact"] };
+  var lastTrack = {};
+  function track(kind, extra) {
+    // Un clic puede disparar dos escuchas (formulario + enlace): uno por segundo.
+    var now = Date.now();
+    if (lastTrack[kind] && now - lastTrack[kind] < 1000) return;
+    lastTrack[kind] = now;
+    var pageType = PAGE.conv || "clientes";
+    var data = { page_type: pageType, branch: (extra && extra.branch) || PAGE.branch || "", page_path: location.pathname };
+    if (gtagReady) {
+      window.gtag("event", GA_EVENT[kind], data);
+      var label = null;
+      if (kind === "directions") label = CONFIG.ads.labels.direcciones;
+      else if (kind === "whatsapp" || kind === "lead" || kind === "call") label = CONFIG.ads.labels[pageType];
+      if (label && CONFIG.ads.id) window.gtag("event", "conversion", { send_to: CONFIG.ads.id + "/" + label });
+    }
+    if (ttReady) window.ttq.track(TT_EVENT[kind], { content_category: pageType, content_name: data.branch || pageType });
+    var m = META_EVENT[kind];
+    meta(m[0], { content_category: pageType, content_name: data.branch || pageType }, m[1]);
+  }
+  window.LF_TRACK = track;
+
   document.addEventListener("click", function (ev) {
-    var a = ev.target.closest && ev.target.closest('a[href*="wa.me/"]');
-    if (a) trackWhatsApp();
+    var a = ev.target.closest && ev.target.closest("a[href]");
+    if (!a) return;
+    var href = a.getAttribute("href") || "";
+    if (/wa\.me\//.test(a.href)) track("whatsapp");
+    else if (/google\.[^/]+\/maps|maps\.google\.|maps\.app\.goo\.gl/.test(a.href)) track("directions", { branch: a.getAttribute("data-branch") });
+    else if (/apps\.apple\.com|play\.google\.com/.test(a.href)) track("app");
+    else if (/^tel:/.test(href)) track("call");
   }, true);
 
 
@@ -145,7 +239,7 @@
         var name = label ? label.firstChild.textContent.trim() : f.name;
         lines.push("• " + name + ": " + f.value.trim());
       });
-      trackWhatsApp();
+      track("lead");
       window.open(waLink(lines.join("\n")), "_blank", "noopener");
     });
   });
