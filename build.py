@@ -25,6 +25,7 @@ WA_DIRECT_TEL = "+52 477 729 0604"
 # Tipos de página (conv) cuyos contactos van a la línea directa.
 DIRECT_LINES = {"kiosoft", "tecnico"}
 REMOTE = "--remote-images" in sys.argv
+TODAY = __import__("datetime").date.today().isoformat()
 
 # ---------------------------------------------------------------- imágenes
 HF = "https://d8j0ntlcm91z4.cloudfront.net/user_3EzN1ZAEOjOnzrveUuzPUHJUNAc/"
@@ -283,31 +284,41 @@ SUCURSALES = {
         cerca="Blvd. San Juan Bosco y colonias cercanas del poniente de León",
         hours=[("Lun, Jue a Dom", "7:00 a 21:00"), ("Mar y Mié", "7:00 a 15:00")],
         spec=[(["Monday", "Thursday", "Friday", "Saturday", "Sunday"], "07:00", "21:00"), (["Tuesday", "Wednesday"], "07:00", "15:00")],
-        badge="Autoservicio 24 h con app", maps="Lavaforte+Blvd.+San+Juan+Bosco+3802+Le%C3%B3n+Gto"),
+        badge="Autoservicio 24 h con app", maps="Lavaforte+Blvd.+San+Juan+Bosco+3802+Le%C3%B3n+Gto",
+        geo=(21.1762839, -101.7400827), cid="10473586606922501847"),
     "canaveral": dict(
         name="Cañaveral", zona="Blvd. Cañaveral", street="Blvd. Cañaveral 703, Local 3, Granja Santa Teresa", cp="37544",
         cerca="Granja Santa Teresa y colonias cercanas a Blvd. Cañaveral",
         hours=[("Lun, Jue a Dom", "7:00 a 21:00"), ("Mar y Mié", "7:00 a 15:00")],
         spec=[(["Monday", "Thursday", "Friday", "Saturday", "Sunday"], "07:00", "21:00"), (["Tuesday", "Wednesday"], "07:00", "15:00")],
-        badge="Autoservicio 24 h con app", maps="Lavaforte+Blvd.+Ca%C3%B1averal+703+Le%C3%B3n+Gto"),
+        badge="Autoservicio 24 h con app", maps="Lavaforte+Blvd.+Ca%C3%B1averal+703+Le%C3%B3n+Gto",
+        geo=(21.064543, -101.5706426), cid="2715327585947936431"),
     "hermenegildo-bustos": dict(
         name="Hermenegildo Bustos", zona="Valle del Moral", street="Blvd. Hermenegildo Bustos 1338, L4, Valle del Moral", cp="37178",
         cerca="Valle del Moral y colonias cercanas a Blvd. Hermenegildo Bustos",
         hours=[("Lunes", "7:00 a 15:00"), ("Martes", "15:00 a 21:30"), ("Mié a Dom", "7:00 a 21:00")],
         spec=[(["Monday"], "07:00", "15:00"), (["Tuesday"], "15:00", "21:30"), (["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "07:00", "21:00")],
-        badge="Puerta abierta hasta las 12:00 am", maps="Lavaforte+Blvd.+Hermenegildo+Bustos+1338+Le%C3%B3n+Gto"),
+        badge="Puerta abierta hasta las 12:00 am", maps="Lavaforte+Blvd.+Hermenegildo+Bustos+1338+Le%C3%B3n+Gto",
+        geo=(21.1562781, -101.6743476), cid="12602528092609429022"),
+    "satelite": dict(
+        name="Satélite", zona="Ciudad Satélite", street="Blvd. Juan Alonso de Torres Ote. 325, Ciudad Satélite", cp="37353",
+        cerca="Ciudad Satélite y colonias cercanas a Blvd. Juan Alonso de Torres",
+        hours=[("Lun, Jue a Dom", "7:00 a 21:00"), ("Mar y Mié", "13:00 a 21:00")],
+        spec=[(["Monday", "Thursday", "Friday", "Saturday", "Sunday"], "07:00", "21:00"), (["Tuesday", "Wednesday"], "13:00", "21:00")],
+        badge="Autoservicio con app", maps="Lavaforte+Sat%C3%A9lite+Blvd.+Juan+Alonso+de+Torres+325+Le%C3%B3n+Gto",
+        geo=(21.1223933, -101.7208781), cid="6327281701366499494"),
 }
 
 def branch_card(key, b):
     hours = "".join("<li><span>%s</span><span>%s</span></li>" % h for h in b["hours"])
     return ('<article class="branch-x"><div class="branch-x__top"><span class="badge-24">%s</span><h3><a href="sucursal-%s.html" style="text-decoration:none">%s</a></h3>'
             '<p class="addr">%s · C.P. %s</p></div><ul class="hours">%s</ul><div class="btn-row"><a class="btn btn--outline btn--sm" href="sucursal-%s.html">Ver</a>'
-            '<a class="btn btn--navy btn--sm" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=%s">Cómo llegar</a></div></article>'
-            % (b["badge"], key, b["name"], b["street"], b["cp"], hours, key, b["maps"]))
+            '<a class="btn btn--navy btn--sm" target="_blank" rel="noopener" data-branch="%s" href="https://www.google.com/maps/search/?api=1&amp;query=%s">Cómo llegar</a></div></article>'
+            % (b["badge"], key, b["name"], b["street"], b["cp"], hours, key, key, b["maps"]))
 
 def branch_body(key, b):
     others = "".join(branch_card(k, v) for k, v in SUCURSALES.items() if k != key)
-    btns = ('<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=%s">Cómo llegar</a>'
+    btns = ('<a class="btn" target="_blank" rel="noopener" data-branch="' + key + '" href="https://www.google.com/maps/search/?api=1&amp;query=%s">Cómo llegar</a>'
             '<a class="btn btn--ghost" href="https://wa.me/%s" data-wa="Hola Lavaforte %s, quiero información.">WhatsApp</a>') % (b["maps"], WA, b["name"])
     tiles = "".join('<div class="tile ph"><img src="%s" alt="%s" width="1200" height="1500" loading="lazy" /><div class="tile__body"><h3>%s</h3><p>%s</p></div></div>' % (img(i), a, t, p)
                     for i, a, t, p in [("cliente-app", "Autoservicio con app", "Autoservicio", "Paga con la app, a cualquier hora."),
@@ -358,7 +369,7 @@ def branch_body(key, b):
     <section class="section section--muted">
       <div class="container">
         <div class="section-head" data-reveal><p class="eyebrow">Otras sucursales</p></div>
-        <div class="rail" style="--cols:2" data-stagger>%(others)s</div>
+        <div class="rail" style="--cols:3" data-stagger>%(others)s</div>
       </div>
     </section>
   </main>''' % dict(hero=hx("hero-clientes", "Lavandería Lavaforte", b["badge"], 'Lavandería en <span class="hl">%s</span>' % b["zona"],
@@ -382,7 +393,14 @@ def branch_schema(key, b):
             "address": {"@type": "PostalAddress", "streetAddress": b["street"], "postalCode": b["cp"], "addressLocality": "León",
                         "addressRegion": "Guanajuato", "addressCountry": "MX"},
             "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": d, "opens": o, "closes": c} for d, o, c in b["spec"]],
-            "hasMap": "https://www.google.com/maps/search/?api=1&query=" + b["maps"],
+            "geo": {"@type": "GeoCoordinates", "latitude": b["geo"][0], "longitude": b["geo"][1]},
+            "hasMap": "https://maps.google.com/?cid=" + b["cid"],
+            "sameAs": ["https://maps.google.com/?cid=" + b["cid"]],
+            "areaServed": {"@type": "Place", "name": b["cerca"] + ", León, Guanajuato"},
+            "currenciesAccepted": "MXN", "paymentAccepted": "App KioSoft Wash, efectivo, tarjeta",
+            "knowsLanguage": "es",
+            "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": n}} for n in
+                           ["Lavandería de autoservicio con app", "Lavado por encargo por kilo", "Planchado", "Lavado de edredones", "Tintorería"]],
             "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": "WiFi gratis", "value": True}]}
 
 # ---------------------------------------------------------------- FAQ de páginas "a mano"
@@ -448,7 +466,7 @@ LOCAL_BRANCHES = [branch_schema(k, v) for k, v in SUCURSALES.items()]
 PAGES = [
     dict(file="index.html", nav="clientes", strip="tecnico", body=page_index, wa="Hola Lavaforte, quiero información.",
          title="Lavandería de autoservicio con app en León | Lavaforte",
-         desc="Lava cuando puedas: autoservicio con app (24 h en dos sucursales), encargo desde $30/kg, planchado y edredones. 3 sucursales en León, Gto.",
+         desc="Lava cuando puedas: autoservicio con app (24 h en dos sucursales), encargo desde $30/kg, planchado y edredones. 4 sucursales en León, Gto.",
          schema=lambda: [{"@type": "WebSite", "@id": SITE + "#web", "url": SITE, "name": "Lavaforte Lavanderías", "inLanguage": "es-MX", "publisher": {"@id": SITE + "#org"}}, ORG] + LOCAL_BRANCHES + [faq_schema(FAQ_INDEX)], priority="1.0"),
     dict(file="servicio-tecnico.html", nav="tecnico", strip=None, dock=("Cotizar", "#contacto"), og_image="hero-tecnico", body=page_tecnico, conv="tecnico", wa="Hola Lavaforte, necesito servicio técnico para equipo de lavandería.",
          title="Reparación de lavadoras industriales en León | Lavaforte",
@@ -472,6 +490,9 @@ PAGES = [
          desc="Lavaforte desarrolla y opera lavanderías de autoservicio con cobro por app en León. Conoce el modelo de inversión y pide el dossier.",
          schema=lambda: [ORG, faq_schema(FAQ_INV), crumbs(("Inicio", ""), ("Inversionistas", "inversionistas.html"))], priority="0.6"),
 ]
+PAGES.append(dict(file="privacidad.html", nav="", strip=None, body=lambda: read("privacidad.main.html").replace("{{HOY}}", TODAY), wa="Hola Lavaforte, tengo una duda sobre mis datos.",
+                  title="Aviso de privacidad del sitio | Lavaforte", desc="Qué datos se obtienen en lavaforte.com.mx, cookies de Google y Meta, y cómo ejercer tus derechos ARCO.",
+                  schema=lambda: [ORG], priority="0.2"))
 for k, s in SEGMENTOS.items():
     PAGES.append(dict(file=s["slug"] + ".html", nav="tecnico", strip=None, dock=("Cotizar", "#contacto"), body=(lambda s=s: segment_body(s)), conv="tecnico", wa=s["wa"],
                       title=s["title"], desc=s["desc"], og_image=s["img"], priority="0.8",
@@ -480,7 +501,7 @@ for k, s in SEGMENTOS.items():
                                            faq_schema(s["faq"]), crumbs(("Inicio", ""), ("Servicio técnico", "servicio-tecnico.html"),
                                                                         (s["eyebrow"].split(" · ")[0], s["slug"] + ".html"))])))
 for k, b in SUCURSALES.items():
-    PAGES.append(dict(file="sucursal-%s.html" % k, nav="sucursales", strip="tecnico", dock=("Cómo llegar", "https://www.google.com/maps/search/?api=1&amp;query=" + b["maps"]), body=(lambda k=k, b=b: branch_body(k, b)),
+    PAGES.append(dict(file="sucursal-%s.html" % k, nav="sucursales", branch=k, strip="tecnico", dock=("Cómo llegar", "https://www.google.com/maps/search/?api=1&amp;query=" + b["maps"]), body=(lambda k=k, b=b: branch_body(k, b)),
                       wa="Hola Lavaforte %s, quiero información." % b["name"],
                       title="Lavandería en %s, León | Lavaforte" % b["name"],
                       desc="Lavaforte %s: autoservicio con app, encargo desde $30/kg, planchado y edredones en %s, León. Horario y cómo llegar." % (b["name"], b["zona"]),
@@ -516,7 +537,6 @@ HEAD = '''<!DOCTYPE html>
 </head>
 '''
 
-TODAY = __import__("datetime").date.today().isoformat()
 
 def build():
     header = read("_header.html"); footer = read("_footer.html")
@@ -525,11 +545,14 @@ def build():
         url = SITE + ("" if p["file"] == "index.html" else p["file"])
         og = p.get("og_image", "hero-clientes")
         og_url = (img(og) if REMOTE else SITE + img(og)) if og else SITE + "assets/img/lavaforte-logo-180.png"
-        ld = json.dumps({"@context": "https://schema.org", "@graph": p["schema"]()}, ensure_ascii=False)
+        webpage = {"@type": "WebPage", "@id": url + "#pagina", "url": url, "name": p["title"], "description": p["desc"],
+                   "inLanguage": "es-MX", "dateModified": TODAY, "isPartOf": {"@type": "WebSite", "@id": SITE + "#web", "url": SITE, "name": "Lavaforte Lavanderías"},
+                   "publisher": {"@id": SITE + "#org"}}
+        ld = json.dumps({"@context": "https://schema.org", "@graph": p["schema"]() + [webpage]}, ensure_ascii=False)
         h = header.replace("{{STRIP}}", STRIPS[p["strip"]]).replace("{{WA}}", html.escape(p["wa"]))
         h = h.replace('data-nav="%s"' % p["nav"], 'data-nav="%s" aria-current="page"' % p["nav"])
         direct = p.get("conv") in DIRECT_LINES
-        page = json.dumps({"line": "directo" if direct else "general", "conv": p.get("conv", "")})
+        page = json.dumps({"line": "directo" if direct else "general", "conv": p.get("conv", ""), "branch": p.get("branch", "")})
         out = HEAD % dict(page=page, title=html.escape(p["title"]), desc=html.escape(p["desc"]), url=url, og=og_url, ld=ld) + h + p["body"]() + footer.replace("{{WA}}", html.escape(p["wa"])).replace("{{WA_DISPLAY}}", WA_DIRECT_DISPLAY if direct else WA_DISPLAY).replace("{{DOCK_LABEL}}", p.get("dock", ("Sucursales", "index.html#sucursales"))[0]).replace("{{DOCK_HREF}}", p.get("dock", ("Sucursales", "index.html#sucursales"))[1])
         open(os.path.join(ROOT, p["file"]), "w").write(out)
         urls.append((url, p["priority"]))

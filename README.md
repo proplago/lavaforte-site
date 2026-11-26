@@ -9,7 +9,7 @@ fuente de verdad. El HTML se genera con `build.py` (Python 3, sin librerías).
 | Archivo | Para quién / qué búsqueda |
 |---|---|
 | `index.html` | Clientes: "lavandería en León", servicios, app, bono de recarga, sucursales, FAQ |
-| `sucursal-san-juan-bosco.html`, `sucursal-canaveral.html`, `sucursal-hermenegildo-bustos.html` | Búsquedas locales por sucursal, con horario y mapa (enlazar desde cada Google Business Profile) |
+| `sucursal-san-juan-bosco.html`, `sucursal-canaveral.html`, `sucursal-hermenegildo-bustos.html`, `sucursal-satelite.html` | Búsquedas locales por sucursal, con horario y mapa (enlazar desde cada Google Business Profile) |
 | `servicio-tecnico.html` | Campaña local: reparación de lavadoras y secadoras industriales en León, por evento |
 | `reparacion-lavanderia-hoteles.html` / `-hospitales.html` / `-autoservicio.html` | Landings por segmento para Google Ads |
 | `kiosoft.html` | Campaña nacional: instalación de KioSoft |
@@ -48,6 +48,27 @@ Todo el contacto vive en `CONFIG` dentro de `js/site.js`.
   así se sabe de qué campaña llegó cada contacto.
 - Sucursales y horarios: README del design system (fuente única de verdad).
 - Servicio técnico es por evento; no hay pólizas todavía.
+
+## Medición (Google, Meta, TikTok)
+
+Todo vive en `CONFIG` de `js/site.js` y en una sola función `track()`:
+
+| Acción en el sitio | GA4 (G-GWDD6KWV5D) | Google Ads (AW-11035918867) | Meta | TikTok |
+|---|---|---|---|---|
+| Clic a WhatsApp | `contact_whatsapp` | conversión según página: clientes / técnico / KioSoft | `Contact` | `Contact` |
+| Formulario enviado a WhatsApp | `generate_lead` | igual que arriba | `Lead` | `SubmitForm` |
+| Clic en "Cómo llegar" | `get_directions` (con sucursal) | "Cómo llegar desde el sitio" | `FindLocation` | `FindLocation` |
+| Clic a la tienda de la app | `app_download_click` | — | `AppDownloadClick` | `Download` |
+
+Cada evento lleva `page_type` (clientes, tecnico, kiosoft) y `branch` (sucursal), así un solo
+Pixel separa clientes finales de negocios con conversiones personalizadas.
+
+- Meta: `meta.pixel` vacío = apagado. Con id, carga el Pixel y manda cada evento también a la
+  API de conversiones (`supabase/functions/meta-capi`, proyecto Supabase bzyxiadoibukmzmgdnha)
+  con el mismo `event_id` para que Meta no cuente doble. El token va en los secretos de Supabase.
+- TikTok: `tiktok` vacío = apagado.
+- IndexNow: `64c52c28cc2be5278b493b275eb80412.txt` en la raíz. Después de publicar cambios,
+  avisar a Bing/Yandex con `https://api.indexnow.org/indexnow?url=<url>&key=<clave>`.
 
 ## Desarrollo local
 
