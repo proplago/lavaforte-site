@@ -290,8 +290,8 @@ SUCURSALES = {
         name="Cañaveral", zona="Blvd. Cañaveral", street="Blvd. Cañaveral 703, Local 3, Granja Santa Teresa", cp="37544",
         cerca="Granja Santa Teresa y colonias cercanas a Blvd. Cañaveral",
         hours=[("Lun, Jue a Dom", "7:00 a 21:00"), ("Mar y Mié", "7:00 a 15:00")],
-        spec=[(["Monday", "Thursday", "Friday", "Saturday", "Sunday"], "07:00", "21:00"), (["Tuesday", "Wednesday"], "07:00", "15:00")],
-        badge="Autoservicio 24 h con app", maps="Lavaforte+Blvd.+Ca%C3%B1averal+703+Le%C3%B3n+Gto",
+        spec=[(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "07:00", "22:00")],
+        badge="Autoservicio de 7:00 a 22:00", maps="Lavaforte+Blvd.+Ca%C3%B1averal+703+Le%C3%B3n+Gto",
         geo=(21.064543, -101.5706426), cid="2715327585947936431"),
     "hermenegildo-bustos": dict(
         name="Hermenegildo Bustos", zona="Valle del Moral", street="Blvd. Hermenegildo Bustos 1338, L4, Valle del Moral", cp="37178",
@@ -410,7 +410,7 @@ FAQ_INDEX = [
     ("¿Necesito llevar detergente?", "Nuestras lavadoras son de alta eficiencia y funcionan con detergente HE. Si no traes, pregunta en mostrador."),
     ("¿Cuánto cuesta lavar por encargo?", "Desde $30 por kilo con carga mínima de 3 kg. Te confirmamos la hora de entrega por WhatsApp."),
     ("¿Mi saldo sirve en cualquier sucursal?", "Sí. El saldo y el bono de recarga funcionan en todas las sucursales Lavaforte y no vencen."),
-    ("¿Hay lavandería 24 horas en León?", "Sí. En Lavaforte San Juan Bosco y Cañaveral el autoservicio funciona las 24 horas con la app."),
+    ("¿Hay lavandería 24 horas en León?", "Sí. En Lavaforte San Juan Bosco el autoservicio funciona las 24 horas con la app. En Cañaveral el autoservicio abre todos los días de 7:00 a 22:00."),
 ]
 FAQ_TECNICO = [
     ("¿Qué equipos reparan?", "Lavadoras extractoras, lavadoras y secadoras de autoservicio, secadoras industriales de gas y eléctricas, planchadoras de rodillo y lectores de pago."),
@@ -466,7 +466,7 @@ LOCAL_BRANCHES = [branch_schema(k, v) for k, v in SUCURSALES.items()]
 PAGES = [
     dict(file="index.html", nav="clientes", strip="tecnico", body=page_index, wa="Hola Lavaforte, quiero información.",
          title="Lavandería de autoservicio con app en León | Lavaforte",
-         desc="Lava cuando puedas: autoservicio con app (24 h en dos sucursales), encargo desde $30/kg, planchado y edredones. 4 sucursales en León, Gto.",
+         desc="Lava cuando puedas: autoservicio con app (24 h en San Juan Bosco), encargo desde $30/kg, planchado y edredones. 4 sucursales en León, Gto.",
          schema=lambda: [{"@type": "WebSite", "@id": SITE + "#web", "url": SITE, "name": "Lavaforte Lavanderías", "inLanguage": "es-MX", "publisher": {"@id": SITE + "#org"}}, ORG] + LOCAL_BRANCHES + [faq_schema(FAQ_INDEX)], priority="1.0"),
     dict(file="servicio-tecnico.html", nav="tecnico", strip=None, dock=("Cotizar", "#contacto"), og_image="hero-tecnico", body=page_tecnico, conv="tecnico", wa="Hola Lavaforte, necesito servicio técnico para equipo de lavandería.",
          title="Reparación de lavadoras industriales en León | Lavaforte",
